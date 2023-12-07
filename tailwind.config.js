@@ -47,6 +47,7 @@ module.exports = {
         "2xl": "1536px",
       },
       colors: {
+        navActive: "#B511B8",
         headingColor: "#2e2e2e",
         textColor: "#515151",
         cartNumBg: "#e80013",

@@ -6,10 +6,10 @@ import Home from "./page/Home";
 
 function App() {
     return (
-        <div className="w-screen min-h-screen h-auto flex flex-col items-center justify-center">
+        <div className="min-h-screen h-auto items-center justify-center bg-white">
             <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/sign-up" element={<Signup />} />
+                <Route exact path="/login" element={<Login />} />
+                <Route exact path="/sign-up" element={<Signup />} />
                 <Route path="/" element={<Home />} />
             </Routes>
         </div>
