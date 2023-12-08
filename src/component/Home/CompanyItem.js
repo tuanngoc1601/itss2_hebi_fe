@@ -3,9 +3,13 @@ import { company } from "../../assets";
 import { PiCompassLight } from "react-icons/pi";
 import { AiOutlineDollar } from "react-icons/ai";
 
-const CompanyItem = () => {
+const CompanyItem = ({companyItem}) => {
+    const currentDate = new Date(companyItem.created_at);
+    const updatedAtDate = new Date(companyItem.updated_at);
+    const timeDiffInDays = Math.floor((currentDate - updatedAtDate) / (1000 * 60 * 60 * 24));
+    
     return (
-        <div className="w-3/4 mx-auto flex flex-row items-center justify-center px-3 border shadow rounded-xl cursor-pointer">
+        <div className="w-3/4 mx-auto flex flex-row items-center justify-center px-3 border shadow rounded-xl cursor-pointer">           
             <div
                 className="flex justify-center items-center"
                 style={{ width: "10%" }}
@@ -14,23 +18,23 @@ const CompanyItem = () => {
             </div>
             <div className="flex flex-col p-3" style={{ width: "70%" }}>
                 <h4 className="text-base font-semibold">
-                    Giáo viên tiếng Nhật
+                    {companyItem.title}
                 </h4>
                 <h5 className="text-sm font-normal">
-                    Công Ty TNHH Thương Mại và Phát Triển Nhân Lực Miền Tây
+                    {companyItem.name}
                 </h5>
                 <div className="flex flex-wrap items-center justify-start gap-1 mt-6">
                     <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">Trà vinh</span>
+                        <span class="">{companyItem.location}</span>
+                    </div>
+                    <div class="relative g  rid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                        <span class="">{companyItem.industry}</span>
                     </div>
                     <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">Giáo dục</span>
+                        <span class="">{companyItem.field}</span>
                     </div>
                     <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">Giáo viên</span>
-                    </div>
-                    <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">Thời gian thực tập 3 tháng</span>
+                        <span class="">{companyItem.internship_duration}</span>
                     </div>
                     <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
                         <span class="">Trực tiếp</span>
@@ -42,10 +46,10 @@ const CompanyItem = () => {
                         <span class="">Toàn thời gian</span>
                     </div>
                     <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">Thời gian cập nhập 12 ngày trước</span>
+                        <span class="">Thời gian cập nhật {timeDiffInDays} ngày trước</span>
                     </div>
                     <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">Số lượng còn tuyển dụng 4/20</span>
+                        <span class="">Số lượng tuyển dụng {companyItem.recruitment_number}</span>
                     </div>
                 </div>
             </div>
@@ -53,15 +57,15 @@ const CompanyItem = () => {
                 <div>
                     <p className="flex items-center justify-end text-sm font-semibold text-navActive gap-1">
                         <PiCompassLight className="text-lg text-green-500" />
-                        Đang tuyển
+                        {companyItem.isClosed ? 'Ngừng tuyển' : 'Đang tuyển'}
                     </p>
                     <p className="flex items-center justify-end text-sm font-semibold text-navActive gap-1">
                         <AiOutlineDollar className="text-lg text-gray-700" />
-                        2.000.000 đồng
+                        {companyItem.salary}
                     </p>
                 </div>
                 <p className="text-xs font-normal text-end">
-                    12/06/2023 lúc 5:45
+                    {companyItem.created_at}    
                 </p>
             </div>
         </div>
