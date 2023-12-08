@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
@@ -6,6 +6,7 @@ import { IoCheckmark } from "react-icons/io5";
 
 const LocationDropdownFilter = (props) => {
     const [isOpen, setIsOpen] = React.useState(false);
+    const [cities, setCities] = useState([{province_id:'',province_name:'Tất cả tỉnh/thành phố',province_type:''}]);
     const dropdownRef = React.useRef(null);
 
     const handleOptionsChange = (e) => {
@@ -15,11 +16,7 @@ const LocationDropdownFilter = (props) => {
 
     React.useEffect(() => {
         const handleOutsideClick = (event) => {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target)
-                // !dropdownRef.current.parentElement.firstElementChild
-            ) {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 setIsOpen(false);
             }
         };
@@ -30,6 +27,21 @@ const LocationDropdownFilter = (props) => {
         };
     }, []);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch("https://vapi.vnappmob.com/api/province/"); // Thay YOUR_API_ENDPOINT bằng URL của API
+                const data = await response.json();
+                setCities((prevCities) => prevCities.concat(data.results)); 
+                
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+        
+    }, [cities]);
     return (
         <div className="block">
             <button
@@ -39,9 +51,7 @@ const LocationDropdownFilter = (props) => {
             >
                 <CiLocationOn className="text-xl mr-1" />
                 <span style={{ width: "144.02px" }}>
-                    {props.location !== ""
-                        ? props.location
-                        : "Tất cả tỉnh/thành phố"}
+                    {props.location !== "" ? props.location : cities[0].province_name}
                 </span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
@@ -65,144 +75,31 @@ const LocationDropdownFilter = (props) => {
                         </div>
                     </div>
                     <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="all"
-                                    type="radio"
-                                    value=""
-                                    name="city"
-                                    hidden
-                                    onChange={handleOptionsChange}
-                                />
-                                <label
-                                    htmlFor="all"
-                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Tất cả tỉnh/thành phố
-                                    {props.location === "" && (
-                                        <span>
-                                            <IoCheckmark className="text-lg text-green-400" />
-                                        </span>
-                                    )}
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="namdinh"
-                                    type="radio"
-                                    value="Nam Định"
-                                    name="city"
-                                    hidden
-                                    onChange={handleOptionsChange}
-                                />
-                                <label
-                                    htmlFor="namdinh"
-                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Nam Định
-                                    {props.location === "Nam Định" && (
-                                        <span>
-                                            <IoCheckmark className="text-lg text-green-400" />
-                                        </span>
-                                    )}
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="hanoi"
-                                    type="radio"
-                                    value="Hà Nội"
-                                    name="city"
-                                    hidden
-                                    onChange={handleOptionsChange}
-                                />
-                                <label
-                                    htmlFor="hanoi"
-                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Hà Nội
-                                    {props.location === "Hà Nội" && (
-                                        <span>
-                                            <IoCheckmark className="text-lg text-green-400" />
-                                        </span>
-                                    )}
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="haiduong"
-                                    type="radio"
-                                    value="Hải Dương"
-                                    name="city"
-                                    hidden
-                                    onChange={handleOptionsChange}
-                                />
-                                <label
-                                    htmlFor="haiduong"
-                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Hải Dương
-                                    {props.location === "Hải Dương" && (
-                                        <span>
-                                            <IoCheckmark className="text-lg text-green-400" />
-                                        </span>
-                                    )}
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="bacninh"
-                                    type="radio"
-                                    value="Bắc Ninh"
-                                    name="city"
-                                    hidden
-                                    onChange={handleOptionsChange}
-                                />
-                                <label
-                                    htmlFor="bacninh"
-                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Bắc Ninh
-                                    {props.location === "Bắc Ninh" && (
-                                        <span>
-                                            <IoCheckmark className="text-lg text-green-400" />
-                                        </span>
-                                    )}
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="haiphong"
-                                    type="radio"
-                                    value="Hải Phòng"
-                                    name="city"
-                                    hidden
-                                    onChange={handleOptionsChange}
-                                />
-                                <label
-                                    htmlFor="haiphong"
-                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Hải Phòng
-                                    {props.location === "Hải Phòng" && (
-                                        <span>
-                                            <IoCheckmark className="text-lg text-green-400" />
-                                        </span>
-                                    )}
-                                </label>
-                            </div>
-                        </li>
+                        {cities.map((city) => (
+                            <li key={city.index}>
+                                <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
+                                    <input
+                                        // id={city.province_id}
+                                        type="radio"
+                                        value={city.province_name}
+                                        name="city"
+                                        hidden
+                                        onChange={handleOptionsChange}
+                                    />
+                                    <label
+                                        htmlFor={city.province_name}
+                                        className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
+                                    >
+                                        {city.province_name}
+                                        {props.location === city.province_name && (
+                                            <span>
+                                                <IoCheckmark className="text-lg text-green-400" />
+                                            </span>
+                                        )}
+                                    </label>
+                                </div>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             )}
