@@ -31,7 +31,7 @@ const CompanyDropdownFilter = () => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <BiHomeCircle className="text-xl mr-1" />
-                Tất cả công ty
+                <span style={{ width: "95.86px" }}>Tất cả công ty</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}

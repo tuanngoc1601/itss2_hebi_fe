@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LocationDropdownFilter from "./Dropdown/LocationDropdownFilter";
 import SalaryDropdownFilter from "./Dropdown/SalaryDropdownFilter";
 import SpecializedDropdownFilter from "./Dropdown/SpecializedDropdownFilter";
@@ -11,18 +11,16 @@ import TypeDropdownFilter from "./Dropdown/TypeDropdownFilter";
 import StatusDropdownFilter from "./Dropdown/StatusDropdownFilter";
 
 const JobFilter = () => {
-    const [filterData, setFilterData] = React.useState({
-        city: "",
-        salary: "",
-        specialized: "",
-        field: "",
-        time: "",
-        method: "",
-        company: "",
-        distance: "",
-        type: "",
-        recruiting: "",
-    });
+    const [location, setLocation] = useState("");
+    const [salary, setSalary] = useState("");
+    const [specialized, setSpecialized] = useState("");
+    const [field, setField] = useState("");
+    const [time, setTime] = useState("");
+    const [medthod, setMethod] = useState("");
+    const [company, setCompany] = useState("");
+    const [distance, setDistance] = useState("");
+    const [type, setType] = useState("");
+    const [status, setStatus] = useState("");
 
     return (
         <div className="w-full mt-5">
@@ -32,7 +30,10 @@ const JobFilter = () => {
             <div className="w-11/12 mx-auto flex flex-row mt-8">
                 <div className="w-11/12 flex flex-col gap-y-4">
                     <div className="flex flex-row justify-start items-center gap-x-4">
-                        <LocationDropdownFilter />
+                        <LocationDropdownFilter
+                            location={location}
+                            setLocation={setLocation}
+                        />
                         <SalaryDropdownFilter />
                         <SpecializedDropdownFilter />
                         <FieldDropdownFilter />
@@ -57,7 +58,6 @@ const JobFilter = () => {
                     TỔNG CỘNG 12 KẾT QUẢ
                 </div>
             </div>
-
         </div>
     );
 };

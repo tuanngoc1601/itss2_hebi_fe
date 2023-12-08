@@ -31,12 +31,15 @@ const SpecializedDropdownFilter = () => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <HiOutlineShoppingBag className="text-xl mr-1" />
-                Tất cả các ngành
+                <span style={{ width: "114.98px" }}>Tất cả các ngành</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}
             {isOpen && (
-                <div ref={dropdownRef} className="absolute z-10 mt-2 origin-top bg-white rounded-lg shadow w-60">
+                <div
+                    ref={dropdownRef}
+                    className="absolute z-10 mt-2 origin-top bg-white rounded-lg shadow w-60"
+                >
                     <div className="p-3">
                         <div className="relative">
                             <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">

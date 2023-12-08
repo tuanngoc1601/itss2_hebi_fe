@@ -32,13 +32,13 @@ const MethodDropdownFilter = () => {
                 <div className="inline-block">
                     <img src={iconFilter} alt="filter" className="w-5 mr-1" />
                 </div>
-                Tất cả phương thức
+                <span style={{ width: "131.91px" }}>Tất cả phương thức</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}
             {isOpen && (
                 <div ref={dropdownRef} className="absolute z-10 mt-2 origin-top bg-white rounded-lg shadow w-60">
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="h-38 px-3 pb-3 overflow-y-auto text-sm text-gray-700 mt-2">
                         <li>
                             <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                 <input

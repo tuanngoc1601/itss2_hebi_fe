@@ -31,7 +31,7 @@ const FieldDropdownFilter = () => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <IoIosCube className="text-xl mr-1" />
-                Tất cả lĩnh vực
+                <span style={{ width: "98.55px" }}>Tất cả lĩnh vực</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}

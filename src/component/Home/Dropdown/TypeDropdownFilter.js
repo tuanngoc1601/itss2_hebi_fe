@@ -30,13 +30,13 @@ const TypeDropdownFilter = () => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <BiNotepad className="text-xl mr-1" />
-                Tất cả hình thức
+                <span style={{ width: "108.9px" }}>Tất cả hình thức</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}
             {isOpen && (
                 <div ref={dropdownRef} className="absolute z-10 mt-2 origin-top bg-white rounded-lg shadow w-60">
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="h-30 px-3 pb-3 overflow-y-auto text-sm text-gray-700 mt-2">
                         <li>
                             <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                 <input

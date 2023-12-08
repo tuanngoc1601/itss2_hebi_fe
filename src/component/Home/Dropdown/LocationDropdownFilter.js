@@ -2,16 +2,23 @@ import React from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { CiLocationOn } from "react-icons/ci";
+import { IoCheckmark } from "react-icons/io5";
 
-const LocationDropdownFilter = () => {
+const LocationDropdownFilter = (props) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const dropdownRef = React.useRef(null);
+
+    const handleOptionsChange = (e) => {
+        props.setLocation(e.target.value);
+        setIsOpen(false);
+    };
 
     React.useEffect(() => {
         const handleOutsideClick = (event) => {
             if (
                 dropdownRef.current &&
                 !dropdownRef.current.contains(event.target)
+                // !dropdownRef.current.parentElement.firstElementChild
             ) {
                 setIsOpen(false);
             }
@@ -31,7 +38,11 @@ const LocationDropdownFilter = () => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <CiLocationOn className="text-xl mr-1" />
-                Tất cả tỉnh/thành phố
+                <span style={{ width: "144.02px" }}>
+                    {props.location !== ""
+                        ? props.location
+                        : "Tất cả tỉnh/thành phố"}
+                </span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}
@@ -59,15 +70,21 @@ const LocationDropdownFilter = () => {
                                 <input
                                     id="all"
                                     type="radio"
-                                    value="all"
+                                    value=""
                                     name="city"
                                     hidden
+                                    onChange={handleOptionsChange}
                                 />
                                 <label
                                     htmlFor="all"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
+                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
                                 >
                                     Tất cả tỉnh/thành phố
+                                    {props.location === "" && (
+                                        <span>
+                                            <IoCheckmark className="text-lg text-green-400" />
+                                        </span>
+                                    )}
                                 </label>
                             </div>
                         </li>
@@ -76,15 +93,21 @@ const LocationDropdownFilter = () => {
                                 <input
                                     id="namdinh"
                                     type="radio"
-                                    value="namdinh"
+                                    value="Nam Định"
                                     name="city"
                                     hidden
+                                    onChange={handleOptionsChange}
                                 />
                                 <label
                                     htmlFor="namdinh"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
+                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
                                 >
                                     Nam Định
+                                    {props.location === "Nam Định" && (
+                                        <span>
+                                            <IoCheckmark className="text-lg text-green-400" />
+                                        </span>
+                                    )}
                                 </label>
                             </div>
                         </li>
@@ -93,15 +116,21 @@ const LocationDropdownFilter = () => {
                                 <input
                                     id="hanoi"
                                     type="radio"
-                                    value="hanoi"
+                                    value="Hà Nội"
                                     name="city"
                                     hidden
+                                    onChange={handleOptionsChange}
                                 />
                                 <label
                                     htmlFor="hanoi"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
+                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
                                 >
                                     Hà Nội
+                                    {props.location === "Hà Nội" && (
+                                        <span>
+                                            <IoCheckmark className="text-lg text-green-400" />
+                                        </span>
+                                    )}
                                 </label>
                             </div>
                         </li>
@@ -110,15 +139,21 @@ const LocationDropdownFilter = () => {
                                 <input
                                     id="haiduong"
                                     type="radio"
-                                    value="haiduong"
+                                    value="Hải Dương"
                                     name="city"
                                     hidden
+                                    onChange={handleOptionsChange}
                                 />
                                 <label
                                     htmlFor="haiduong"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
+                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
                                 >
                                     Hải Dương
+                                    {props.location === "Hải Dương" && (
+                                        <span>
+                                            <IoCheckmark className="text-lg text-green-400" />
+                                        </span>
+                                    )}
                                 </label>
                             </div>
                         </li>
@@ -127,15 +162,21 @@ const LocationDropdownFilter = () => {
                                 <input
                                     id="bacninh"
                                     type="radio"
-                                    value="bacninh"
+                                    value="Bắc Ninh"
                                     name="city"
                                     hidden
+                                    onChange={handleOptionsChange}
                                 />
                                 <label
                                     htmlFor="bacninh"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
+                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
                                 >
                                     Bắc Ninh
+                                    {props.location === "Bắc Ninh" && (
+                                        <span>
+                                            <IoCheckmark className="text-lg text-green-400" />
+                                        </span>
+                                    )}
                                 </label>
                             </div>
                         </li>
@@ -144,15 +185,21 @@ const LocationDropdownFilter = () => {
                                 <input
                                     id="haiphong"
                                     type="radio"
-                                    value="haiphong"
+                                    value="Hải Phòng"
                                     name="city"
                                     hidden
+                                    onChange={handleOptionsChange}
                                 />
                                 <label
                                     htmlFor="haiphong"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
+                                    className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
                                 >
                                     Hải Phòng
+                                    {props.location === "Hải Phòng" && (
+                                        <span>
+                                            <IoCheckmark className="text-lg text-green-400" />
+                                        </span>
+                                    )}
                                 </label>
                             </div>
                         </li>

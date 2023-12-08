@@ -30,7 +30,7 @@ const SalaryDropdownFilter = () => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <AiOutlineDollar className="text-xl mr-1" />
-                Tất cả mức lương
+                <span style={{ width: "116.91px" }}>Tất cả mức lương</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}

@@ -30,7 +30,7 @@ const TimeDropdownFilter = () => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <CiTimer className="text-xl mr-1" />
-                Tất cả thời gian
+                <span style={{ width: "103.6px" }}>Tất cả thời gian</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}

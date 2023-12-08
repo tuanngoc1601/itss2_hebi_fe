@@ -31,7 +31,7 @@ const DistanceDropdownFilter = () => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <GiRoad className="text-xl mr-1" />
-                Tất cả khoảng cách
+                <span style={{ width: "131.27px" }}>Tất cả khoảng cách</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}
