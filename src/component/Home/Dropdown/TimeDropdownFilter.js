@@ -100,18 +100,17 @@ const TimeDropdownFilter = (props) => {
                     <div className="p-3">
                         <div className="relative flex justify-center items-center gap-x-2">
                             <input
-                                type="number"
+                                type="text"
                                 className="block w-16 p-2 ps-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                                 placeholder="From"
-                                min="0"
+                                
                                 onChange={handleChangeStartTime}
                             />
                             <span>-</span>
                             <input
-                                 type="number"
+                                type="text"
                                 className="block w-16 p-2 ps-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                                 placeholder="To"
-                                min="0"
                                 onChange={handleChangeEndTime}
 
                             />
@@ -135,7 +134,7 @@ const TimeDropdownFilter = (props) => {
                     id={range.id}
                     type="radio"
                     value={range.id}
-                    name="salary"
+                    name="time"
                     
                     hidden
                   />
