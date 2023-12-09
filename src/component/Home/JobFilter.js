@@ -12,10 +12,10 @@ import StatusDropdownFilter from "./Dropdown/StatusDropdownFilter";
 
 const JobFilter = () => {
     const [location, setLocation] = useState('Tất cả tỉnh/thành phố');
-    const [salary, setSalary] = useState("");
+    const [salary, setSalary] = useState({startSalary:null, endSalary:null});
     const [specialized, setSpecialized] = useState("");
     const [field, setField] = useState("");
-    const [time, setTime] = useState("");
+    const [time, setTime] = useState({startTime:null, endTime:null});
     const [medthod, setMethod] = useState("");
     const [company, setCompany] = useState("");
     const [distance, setDistance] = useState("");
@@ -33,10 +33,16 @@ const JobFilter = () => {
                             location={location}
                             setLocation={setLocation}
                         />
-                        <SalaryDropdownFilter />
+                        <SalaryDropdownFilter 
+                        salary={salary}
+                        setSalary={setSalary}
+                        />
                         <SpecializedDropdownFilter />
                         <FieldDropdownFilter />
-                        <TimeDropdownFilter />
+                        <TimeDropdownFilter 
+                        time={time}
+                        setTime={setTime}
+                        />
                     </div>
                     <div className="flex flex-row justify-start items-center gap-x-4">
                         <MethodDropdownFilter />
@@ -47,7 +53,11 @@ const JobFilter = () => {
                     </div>
                 </div>
                 <div className="flex flex-col">
-                    <button className="bg-navActive text-white font-semibold text-base px-3 py-2 rounded">
+                    <button className="bg-navActive text-white font-semibold text-base px-3 py-2 rounded"
+                    onClick={() =>{
+                        console.log({location, salary, time})
+                    }}
+                    >
                         Tìm kiếm
                     </button>
                 </div>

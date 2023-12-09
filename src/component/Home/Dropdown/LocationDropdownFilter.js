@@ -32,7 +32,7 @@ const LocationDropdownFilter = (props) => {
         };
     }, []);
 
-    useEffect(() => {
+   useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch("https://vapi.vnappmob.com/api/province/");
