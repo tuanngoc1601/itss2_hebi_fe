@@ -1,12 +1,21 @@
-import React from "react";
+import React,{useState}from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 
-const SpecializedDropdownFilter = () => {
+const SpecializedDropdownFilter = (props) => {
     const [isOpen, setIsOpen] = React.useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
     const dropdownRef = React.useRef(null);
 
+
+    const handleOptionsChange = (e) => {
+        props.setSpecialized(e.target.value);
+        setIsOpen(false);
+    };
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
     React.useEffect(() => {
         const handleOutsideClick = (event) => {
             if (
@@ -23,6 +32,12 @@ const SpecializedDropdownFilter = () => {
         };
     }, []);
 
+    // Your array of companies
+    const specializeds = ["Tất cả ngành nghề", "An toàn lao động", "Bán hàng kỹ thuật", "Bán lẻ / Bán sỉ", "Báo chí / Truyền hình", "Bảo hiểm"];
+    const filteredSpecializeds = specializeds.filter((specialized) =>
+    specialized.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
     return (
         <div className="block">
             <button
@@ -31,15 +46,14 @@ const SpecializedDropdownFilter = () => {
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <HiOutlineShoppingBag className="text-xl mr-1" />
-                <span style={{ width: "114.98px" }}>Tất cả các ngành</span>
+                <span style={{ width: "98.55px" }}>
+                {props.specialized !== 'Tất cả lĩnh vực' ?  props.specialized: specializeds[0]}
+                </span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}
             {isOpen && (
-                <div
-                    ref={dropdownRef}
-                    className="absolute z-10 mt-2 origin-top bg-white rounded-lg shadow w-60"
-                >
+                <div ref={dropdownRef} className="absolute z-10 mt-2 origin-top bg-white rounded-lg shadow w-60">
                     <div className="p-3">
                         <div className="relative">
                             <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -50,112 +64,31 @@ const SpecializedDropdownFilter = () => {
                                 id="input-group-search"
                                 className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                                 placeholder="Search"
+                                onChange={handleSearchChange}
                             />
                         </div>
                     </div>
                     <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="all"
-                                    type="radio"
-                                    value="all"
-                                    name="specialized"
-                                    hidden
-                                />
-                                <label
-                                    htmlFor="all"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Tất cả ngành nghề
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="antoanlaodong"
-                                    type="radio"
-                                    value="antoanlaodong"
-                                    name="specialized"
-                                    hidden
-                                />
-                                <label
-                                    htmlFor="antoanlaodong"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    An toàn lao động
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="banhangkythuat"
-                                    type="radio"
-                                    value="banhangkythuat"
-                                    name="specialized"
-                                    hidden
-                                />
-                                <label
-                                    htmlFor="banhangkythuat"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Bán hàng kỹ thuật
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="banlebansi"
-                                    type="radio"
-                                    value="banlebansi"
-                                    name="specialized"
-                                    hidden
-                                />
-                                <label
-                                    htmlFor="banlebansi"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Bán lẻ / Bán sỉ
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="baochitruyenhinh"
-                                    type="radio"
-                                    value="baochitruyenhinh"
-                                    name="specialized"
-                                    hidden
-                                />
-                                <label
-                                    htmlFor="baochitruyenhinh"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Báo chí / Truyền hình
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
-                                <input
-                                    id="baohiem"
-                                    type="radio"
-                                    value="baohiem"
-                                    name="specialized"
-                                    hidden
-                                />
-                                <label
-                                    htmlFor="baohiem"
-                                    className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                >
-                                    Bảo hiểm
-                                </label>
-                            </div>
-                        </li>
+                        {filteredSpecializeds.map((specialized) => (
+                            <li key={specialized}>
+                                <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
+                                    <input
+                                        id={specialized}
+                                        type="radio"
+                                        value={specialized}
+                                        name="specialized"
+                                        hidden
+                                        onChange={handleOptionsChange}
+                                    />
+                                    <label
+                                        htmlFor={specialized}
+                                        className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
+                                    >
+                                        {specialized}
+                                    </label>
+                                </div>
+                            </li>
+                        ))}
                     </ul>
                 </div>
             )}
