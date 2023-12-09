@@ -17,7 +17,7 @@ const JobFilter = () => {
     const [field, setField] = useState("");
     const [time, setTime] = useState({startTime:null, endTime:null});
     const [medthod, setMethod] = useState("");
-    const [company, setCompany] = useState("");
+    const [company, setCompany] = useState("Tất cả công ty");
     const [distance, setDistance] = useState("");
     const [type, setType] = useState("");
     const [status, setStatus] = useState("");
@@ -46,7 +46,10 @@ const JobFilter = () => {
                     </div>
                     <div className="flex flex-row justify-start items-center gap-x-4">
                         <MethodDropdownFilter />
-                        <CompanyDropdownFilter />
+                        <CompanyDropdownFilter 
+                        company={company}
+                        setCompany={setCompany}
+                        />
                         <DistanceDropdownFilter />
                         <TypeDropdownFilter />
                         <StatusDropdownFilter />
@@ -55,7 +58,7 @@ const JobFilter = () => {
                 <div className="flex flex-col">
                     <button className="bg-navActive text-white font-semibold text-base px-3 py-2 rounded"
                     onClick={() =>{
-                        console.log({location, salary, time})
+                        console.log({location, salary, time, company})
                     }}
                     >
                         Tìm kiếm
