@@ -6,12 +6,17 @@ import { IoCheckmark } from "react-icons/io5";
 
 const LocationDropdownFilter = (props) => {
     const [isOpen, setIsOpen] = React.useState(false);
-    const [cities, setCities] = useState([{province_id:'',province_name:'Tất cả tỉnh/thành phố',province_type:''}]);
+    const [cities, setCities] = useState([{province_id:'00',province_name:'Tất cả tỉnh/thành phố',province_type:''}]);
+     const [searchTerm, setSearchTerm] = useState('');
     const dropdownRef = React.useRef(null);
 
     const handleOptionsChange = (e) => {
         props.setLocation(e.target.value);
         setIsOpen(false);
+    };
+
+     const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
     };
 
     React.useEffect(() => {
@@ -30,18 +35,30 @@ const LocationDropdownFilter = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("https://vapi.vnappmob.com/api/province/"); // Thay YOUR_API_ENDPOINT bằng URL của API
+                const response = await fetch("https://vapi.vnappmob.com/api/province/");
                 const data = await response.json();
-                setCities((prevCities) => prevCities.concat(data.results)); 
-                
+
+                // Thay vì thêm dữ liệu mới vào, hãy set lại toàn bộ mảng cities
+                setCities([{
+                    province_id: '00',
+                    province_name: 'Tất cả tỉnh/thành phố',
+                    province_type: ''
+                }, ...data.results]);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         };
 
-        fetchData();
-        
-    }, [cities]);
+        // Gọi fetchData chỉ khi cities rỗng
+        if (cities.length === 1) {
+            fetchData();
+        }
+    }, [cities]); // Thêm cities là dependency để gọi lại useEffect khi cities thay đổi
+
+    const filteredCities = cities.filter((city) =>
+        city.province_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     return (
         <div className="block">
             <button
@@ -51,7 +68,7 @@ const LocationDropdownFilter = (props) => {
             >
                 <CiLocationOn className="text-xl mr-1" />
                 <span style={{ width: "144.02px" }}>
-                    {props.location !== "" ? props.location : cities[0].province_name}
+                    {props.location !== 'Tất cả tỉnh/thành phố' ?  props.location: cities[0].province_name}
                 </span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
@@ -71,27 +88,33 @@ const LocationDropdownFilter = (props) => {
                                 id="input-group-search"
                                 className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                                 placeholder="Search"
+                                onChange={handleSearchChange}
                             />
                         </div>
                     </div>
                     <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
-                        {cities.map((city) => (
+                        {filteredCities.map((city) => (
+                            
                             <li key={city.index}>
                                 <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
+                                <label
+                                        
+                                        className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
+                                    >
+                                    
                                     <input
-                                        // id={city.province_id}
+                                        
                                         type="radio"
                                         value={city.province_name}
                                         name="city"
                                         hidden
                                         onChange={handleOptionsChange}
                                     />
-                                    <label
-                                        htmlFor={city.province_name}
-                                        className="w-full flex items-center justify-between py-2 ms-2 text-sm font-medium text-gray-900 rounded"
-                                    >
+                                    
                                         {city.province_name}
-                                        {props.location === city.province_name && (
+                                        
+                                        {
+                                        props.location === city.province_name && (
                                             <span>
                                                 <IoCheckmark className="text-lg text-green-400" />
                                             </span>

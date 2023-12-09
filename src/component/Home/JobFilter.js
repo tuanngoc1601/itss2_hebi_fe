@@ -11,7 +11,7 @@ import TypeDropdownFilter from "./Dropdown/TypeDropdownFilter";
 import StatusDropdownFilter from "./Dropdown/StatusDropdownFilter";
 
 const JobFilter = () => {
-    const [location, setLocation] = useState("");
+    const [location, setLocation] = useState('Tất cả tỉnh/thành phố');
     const [salary, setSalary] = useState("");
     const [specialized, setSpecialized] = useState("");
     const [field, setField] = useState("");
@@ -21,7 +21,6 @@ const JobFilter = () => {
     const [distance, setDistance] = useState("");
     const [type, setType] = useState("");
     const [status, setStatus] = useState("");
-
     return (
         <div className="w-full mt-5">
             <h3 className="font-bold text-3xl text-center text-navActive leading-8 mt-10">
