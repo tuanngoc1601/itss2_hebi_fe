@@ -5,8 +5,8 @@ import { FaChevronDown } from "react-icons/fa";
 const SalaryDropdownFilter = (props) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [salaryDisplay, setSalaryDisplay] = React.useState('Tất cả mức lương');
-    const [startSalary, setStartSalary] = React.useState(null);
-    const [endSalary, setEndSalary] = React.useState(null);
+    const [startSalary, setStartSalary] = React.useState(0);
+    const [endSalary, setEndSalary] = React.useState(0);
 
     const dropdownRef = React.useRef(null);
 
@@ -22,11 +22,13 @@ const SalaryDropdownFilter = (props) => {
             if(startSalary && !endSalary) {
                 
                 setSalaryDisplay('Trên '+ startSalary + ' triệu');
-                props.setSalary({startSalary, endSalary});
+                props.setSalary({startSalary: startSalary, endSalary: "all"});
+
             }else if(!startSalary && endSalary) {
                 
                 setSalaryDisplay('Dưới '+ endSalary + ' triệu');
-                props.setSalary({startSalary, endSalary});
+                props.setSalary({startSalary: "all", endSalary: endSalary});
+
             }else if(startSalary && endSalary){
                 if(startSalary>=endSalary){
                     const i=startSalary;
@@ -37,7 +39,7 @@ const SalaryDropdownFilter = (props) => {
                 }
                 else {
                     setSalaryDisplay( startSalary + ' - ' + endSalary + ' triệu');
-                    props.setSalary({startSalary, endSalary});
+                    props.setSalary({startSalary: startSalary, endSalary: endSalary});
                 }
             }
         
@@ -48,7 +50,7 @@ const SalaryDropdownFilter = (props) => {
         setStartSalary(range.start);
         setEndSalary(range.end);
         setSalaryDisplay(range.label);
-        props.setSalary({ startSalary: range.start, endSalary: range.end });
+        props.setSalary({ startSalary: range.start, endSalary: range.end  });
         setIsOpen(false);
       };
       
@@ -70,11 +72,13 @@ const SalaryDropdownFilter = (props) => {
 
 
     const salaryRanges = [
-        { id: "all", label: "Tất cả mức lương", start:null, end:null },
-        { id: "2", label: "Dưới 2 triệu", start: null, end:2},
+        { id: "all", label: "Tất cả mức lương", start:'all', end:'all' }, //all -all
+        { id: "2", label: "Dưới 2 triệu", start: 'all', end:2},
         { id: "4", label: "2 - 4 triệu", start: 2, end:4 },
         { id: "6", label: "4 - 6 triệu", start: 4, end:6 },
         { id: "8", label: "6 - 8 triệu" , start: 6, end:8 },
+        { id: "10", label: "Trên 10 triệu" , start: 10, end: 'all'},
+        { id: "0", label: "Lương thỏa thuận" , start: -1, end:-1}
       ];
 
     return (
@@ -83,8 +87,8 @@ const SalaryDropdownFilter = (props) => {
                 className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200"
                 type="button"
                 onClick={() => {
-                    setStartSalary(null);
-                    setEndSalary(null);
+                    setStartSalary(0);
+                    setEndSalary(0);
                     setIsOpen(!isOpen);
                 }}
             >
@@ -98,10 +102,10 @@ const SalaryDropdownFilter = (props) => {
                     <div className="p-3">
                         <div className="relative flex justify-center items-center gap-x-2">
                             <input
-                                type="text"
+                                type="number"
                                 className="block w-16 p-2 ps-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                                 placeholder="From"
-                                
+                                min="0"
                                 onChange={handleChangeStartSalary}
                             />
                             <span>-</span>

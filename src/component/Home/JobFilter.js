@@ -12,15 +12,15 @@ import StatusDropdownFilter from "./Dropdown/StatusDropdownFilter";
 
 const JobFilter = () => {
     const [location, setLocation] = useState('Tất cả tỉnh/thành phố');
-    const [salary, setSalary] = useState({startSalary:null, endSalary:null});
-    const [specialized, setSpecialized] = useState("");
-    const [field, setField] = useState("");
+    const [salary, setSalary] = useState({startSalary:'all', endSalary:'all'});
+    const [specialized, setSpecialized] = useState("Tất cả ngành nghề");
+    const [field, setField] = useState("Tất cả lĩnh vực");
     const [time, setTime] = useState({startTime:null, endTime:null});
-    const [medthod, setMethod] = useState("");
+    const [method, setMethod] = useState("Tất cả phương thức");
     const [company, setCompany] = useState("Tất cả công ty");
     const [distance, setDistance] = useState("");
-    const [type, setType] = useState("");
-    const [status, setStatus] = useState("");
+    const [type, setType] = useState("Tất cả hình thức");
+    const [status, setStatus] = useState("Tất cả trạng thái");
     return (
         <div className="w-full mt-5">
             <h3 className="font-bold text-3xl text-center text-navActive leading-8 mt-10">
@@ -37,28 +37,43 @@ const JobFilter = () => {
                         salary={salary}
                         setSalary={setSalary}
                         />
-                        <SpecializedDropdownFilter />
-                        <FieldDropdownFilter />
+                        <SpecializedDropdownFilter 
+                        specialized={specialized}
+                        setSpecialized={setSpecialized}
+                        />
+                        <FieldDropdownFilter 
+                        field={field}
+                        setField={setField}
+                        />
                         <TimeDropdownFilter 
                         time={time}
                         setTime={setTime}
                         />
                     </div>
                     <div className="flex flex-row justify-start items-center gap-x-4">
-                        <MethodDropdownFilter />
+                        <MethodDropdownFilter 
+                        method={method}
+                        setMethod={setMethod}
+                        />
                         <CompanyDropdownFilter 
                         company={company}
                         setCompany={setCompany}
                         />
                         <DistanceDropdownFilter />
-                        <TypeDropdownFilter />
-                        <StatusDropdownFilter />
+                        <TypeDropdownFilter 
+                        type={type}
+                        setType={setType}
+                        />
+                        <StatusDropdownFilter 
+                        status={status}
+                        setStatus={setStatus}
+                        />
                     </div>
                 </div>
                 <div className="flex flex-col">
                     <button className="bg-navActive text-white font-semibold text-base px-3 py-2 rounded"
                     onClick={() =>{
-                        console.log({location, salary, time, company})
+                        console.log({location, salary, time, company, field, specialized, type, method, status})
                     }}
                     >
                         Tìm kiếm
