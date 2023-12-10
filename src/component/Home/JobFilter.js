@@ -53,7 +53,6 @@ const JobFilter = ({ setJobFilter, jobList }) => {
         })
     };
 
-    console.log(JobFilter)
     return (
         <div className="w-full mt-5">
             <h3 className="font-bold text-3xl text-center text-navActive leading-8 mt-10">
@@ -74,16 +73,31 @@ const JobFilter = ({ setJobFilter, jobList }) => {
                             specialized={specialized}
                             setSpecialized={setSpecialized}
                         />
-                        <FieldDropdownFilter
-                            field={field}
-                            setField={setField}
-                        />
+                        
                         <TimeDropdownFilter
                             time={time}
                             setTime={setTime}
                         />
+                        
+
+                    <div 
+                        style = {{display: "flex", alignItems:"center", marginLeft:"145px"}}
+                    >
+                    <button className="bg-navActive text-white font-semibold text-base px-3 py-2 rounded"    
+                        onClick={() => {
+                            handleSentJobFilter();
+                        }}
+                    >
+                        Tìm kiếm
+                    </button>
+                </div>
                     </div>
                     <div className="flex flex-row justify-start items-center gap-x-4">
+
+                    <FieldDropdownFilter
+                            field={field}
+                            setField={setField}
+                        />
                         <MethodDropdownFilter
                             method={method}
                             setMethod={setMethod}
@@ -100,15 +114,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
 
                     </div>
                 </div>
-                <div className="flex flex-col">
-                    <button className="bg-navActive text-white font-semibold text-base px-3 py-2 rounded"
-                        onClick={() => {
-                            handleSentJobFilter();
-                        }}
-                    >
-                        Tìm kiếm
-                    </button>
-                </div>
+                
             </div>
             <div className="w-11/12 mx-auto flex flex-row justify-start items-center mt-6 pb-12 border-b">
                 <div className="w-30 bg-navActive text-white font-semibold uppercase rounded-md px-4 py-2">
