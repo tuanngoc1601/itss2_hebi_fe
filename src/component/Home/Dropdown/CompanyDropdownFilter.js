@@ -43,11 +43,12 @@ const CompanyDropdownFilter = (props) => {
             <button
                 className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200"
                 type="button"
+                style={{width: "240px", display:"flex", alignItems: "center", justifyContent: "space-between"}}
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <BiHomeCircle className="text-xl mr-1" />
-                <span style={{ width: "95.86px" }}>
-                {props.company !== 'Tất cả tỉnh/thành phố' ?  props.company: companies[0]}
+                <span style={{ width: "150px", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 1, overflow: "hidden", textOverflow: "ellipsis",}}>
+                {props.company !== "all" ?  props.company: companies[0]}
                 </span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
@@ -68,14 +69,16 @@ const CompanyDropdownFilter = (props) => {
                             />
                         </div>
                     </div>
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="px-3 pb-3 overflow-y-auto text-sm text-gray-700"
+                    style={{ maxHeight: '300px' }}
+                    >
                         {filteredCompanies.map((company) => (
                             <li key={company}>
                                 <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                     <input
                                         id={company}
                                         type="radio"
-                                        value={company}
+                                        value={company === "Tất cả công ty"? "all" : company}
                                         name="company"
                                         hidden
                                         onChange={handleOptionsChange}

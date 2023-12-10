@@ -33,7 +33,7 @@ const SpecializedDropdownFilter = (props) => {
     }, []);
 
     // Your array of companies
-    const specializeds = ["Tất cả ngành nghề", "An toàn lao động", "Bán hàng kỹ thuật", "Bán lẻ / Bán sỉ", "Báo chí / Truyền hình", "Bảo hiểm"];
+    const specializeds = ["Tất cả ngành nghề","An toàn lao động","Bán hàng kỹ thuật","Bán lẻ/ bán sỉ","Báo cáo / truyền hình", "Bảo hiểm","Quản trị", "Bất động sản","Công nghệ thông tin","Hành chính","Kế toán","Kinh doanh","Marketing","Nhân sự","Tư vấn",];
     const filteredSpecializeds = specializeds.filter((specialized) =>
     specialized.toLowerCase().includes(searchTerm.toLowerCase())
 );
@@ -43,11 +43,12 @@ const SpecializedDropdownFilter = (props) => {
             <button
                 className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200"
                 type="button"
+                style={{ width: "240px",  display: "flex", alignItems: "center", justifyContent: "space-between" }}
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <HiOutlineShoppingBag className="text-xl mr-1" />
-                <span style={{ width: "98.55px" }}>
-                {props.specialized !== 'Tất cả lĩnh vực' ?  props.specialized: specializeds[0]}
+                <span style={{ width: "150px", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 1, overflow: "hidden", textOverflow: "ellipsis",}}>
+                {props.specialized !== "all" ?  props.specialized: specializeds[0]}
                 </span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
@@ -68,14 +69,16 @@ const SpecializedDropdownFilter = (props) => {
                             />
                         </div>
                     </div>
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="px-3 pb-3 overflow-y-auto text-sm text-gray-700"
+                    style={{ maxHeight: '300px' }}
+                    >
                         {filteredSpecializeds.map((specialized) => (
                             <li key={specialized}>
                                 <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                     <input
                                         id={specialized}
                                         type="radio"
-                                        value={specialized}
+                                        value={specialized === "Tất cả ngành nghề"? "all" : specialized}
                                         name="specialized"
                                         hidden
                                         onChange={handleOptionsChange}

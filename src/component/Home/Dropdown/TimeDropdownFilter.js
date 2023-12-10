@@ -22,13 +22,13 @@ const TimeDropdownFilter = (props) => {
     const handleChangeTime = () =>{
         
             if(startTime && !endTime) {
-                setEndTime(null);
+                
                 setTimeDisplay('Trên '+ startTime + ' tháng');
-                props.setTime({startTime, endTime});
+                props.setTime({startTime: startTime, endTime: "all"});
             }else if(!startTime && endTime) {
-                setStartTime(null);
+                
                 setTimeDisplay('Dưới '+ endTime + ' tháng');
-                props.setTime({startTime, endTime});
+                props.setTime({startTime: 0, endTime: endTime});
             }else if(startTime && endTime){
                 if(startTime>=endTime){
                     const i=startTime;
@@ -72,18 +72,20 @@ const TimeDropdownFilter = (props) => {
 
 
     const timeRanges = [
-        { id: "all", label: "Tất cả thời gian", start:null, end:null },
-        { id: "2", label: "Dưới 2 tháng", start: null, end:2},
-        { id: "4", label: "2 - 4 tháng", start: 2, end:4 },
-        { id: "6", label: "4 - 6 tháng", start: 4, end:6 },
-        { id: "8", label: "6 - 8 tháng" , start: 6, end:8 },
+        { id: "all", label: "Tất cả thời gian", start:"all", end:"all" },
+        { id: "1", label: "Dưới 1 tháng", start: 0, end:1},
+        { id: "2", label: "1 - 2 tháng", start: 1, end:2 },
+        { id: "3", label: "2 - 4 tháng", start: 2, end:4 },
+        { id: "4", label: "4 - 6 tháng" , start: 4, end:6 },
+        { id: "5", label: "Trên 6 tháng" , start: 6, end:"all"}
       ];
 
     return (
         <div className="block">
             <button
-                className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200"
+                className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200 "
                 type="button"
+                style={{width: "240px", display:"flex", alignItems: "center", justifyContent: "space-between"}}
                 onClick={() => {
                     setStartTime(null);
                     setEndTime(null);
@@ -91,7 +93,8 @@ const TimeDropdownFilter = (props) => {
                 }}
             >
                 <CiTimer className="text-xl mr-1" />
-                <span style={{ width: "116.91px" }}>{timeDisplay}</span>
+                <span style={{ width: "150px", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 1, overflow: "hidden", textOverflow: "ellipsis",}}>
+                    {timeDisplay}</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button >
             {/* dropdown */}
@@ -124,7 +127,9 @@ const TimeDropdownFilter = (props) => {
                         </button>
 
                     </div>
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="px-3 pb-3 overflow-y-auto text-sm text-gray-700"
+                    style={{ maxHeight: '300px' }}
+                    >
             {timeRanges.map((range) => (
               <li key={range.id}>
                 <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer"

@@ -34,10 +34,11 @@ const StatusDropdownFilter = (props) => {
             <button
                 className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200"
                 type="button"
+                style={{width: "240px", display:"flex", alignItems: "center", justifyContent: "space-between"}}
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <TbAtom2 className="text-xl mr-1" />
-                <span style={{ width: "108.9px" }}>
+                <span style={{ width: "150px", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 1, overflow: "hidden", textOverflow: "ellipsis",}}>
                 {props.status !== 'Tất cả trạng thái' ?  props.status: statuses[0]}
                     </span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
@@ -45,7 +46,9 @@ const StatusDropdownFilter = (props) => {
             {/* dropdown */}
             {isOpen && (
                 <div ref={dropdownRef} className="absolute z-10 mt-2 origin-top bg-white rounded-lg shadow w-60">
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="px-3 pb-3 overflow-y-auto text-sm text-gray-700"
+                    style={{ maxHeight: '300px' }}
+                    >
                         {statuses.map((status) => (
                             <li key={status}>
                                 <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">

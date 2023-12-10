@@ -27,7 +27,7 @@ const SalaryDropdownFilter = (props) => {
             }else if(!startSalary && endSalary) {
                 
                 setSalaryDisplay('Dưới '+ endSalary + ' triệu');
-                props.setSalary({startSalary: "all", endSalary: endSalary});
+                props.setSalary({startSalary: 0, endSalary: endSalary});
 
             }else if(startSalary && endSalary){
                 if(startSalary>=endSalary){
@@ -73,11 +73,12 @@ const SalaryDropdownFilter = (props) => {
 
     const salaryRanges = [
         { id: "all", label: "Tất cả mức lương", start:'all', end:'all' }, //all -all
-        { id: "2", label: "Dưới 2 triệu", start: 'all', end:2},
-        { id: "4", label: "2 - 4 triệu", start: 2, end:4 },
-        { id: "6", label: "4 - 6 triệu", start: 4, end:6 },
-        { id: "8", label: "6 - 8 triệu" , start: 6, end:8 },
-        { id: "10", label: "Trên 10 triệu" , start: 10, end: 'all'},
+        { id: "1", label: "Dưới 2 triệu", start:0, end:2},
+        { id: "2", label: "2 - 4 triệu", start: 2, end:4 },
+        { id: "3", label: "4 - 6 triệu", start: 4, end:6 },
+        { id: "4", label: "6 - 8 triệu" , start: 6, end:8 },
+        { id: "5", label: "8 - 10 triệu" , start: 8, end:10 },
+        { id: "6", label: "Trên 10 triệu" , start: 10, end: 'all'},
         { id: "0", label: "Lương thỏa thuận" , start: -1, end:-1}
       ];
 
@@ -86,14 +87,15 @@ const SalaryDropdownFilter = (props) => {
             <button
                 className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200"
                 type="button"
+                style={{width: "240px", display:"flex", alignItems: "center", justifyContent: "space-between"}}
                 onClick={() => {
-                    setStartSalary(0);
-                    setEndSalary(0);
+                    setStartSalary(null);
+                    setEndSalary(null);
                     setIsOpen(!isOpen);
                 }}
             >
                 <AiOutlineDollar className="text-xl mr-1" />
-                <span style={{ width: "116.91px" }}>{salaryDisplay}</span>
+                <span style={{ width: "150px", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 1, overflow: "hidden", textOverflow: "ellipsis",}}>{salaryDisplay}</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button >
             {/* dropdown */}
@@ -102,10 +104,9 @@ const SalaryDropdownFilter = (props) => {
                     <div className="p-3">
                         <div className="relative flex justify-center items-center gap-x-2">
                             <input
-                                type="number"
+                                type="text"
                                 className="block w-16 p-2 ps-3 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
                                 placeholder="From"
-                                min="0"
                                 onChange={handleChangeStartSalary}
                             />
                             <span>-</span>
@@ -126,7 +127,9 @@ const SalaryDropdownFilter = (props) => {
                         </button>
 
                     </div>
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="px-3 pb-3 overflow-y-auto text-sm text-gray-700"
+                    style={{ maxHeight: '300px' }}
+                    >
             {salaryRanges.map((range) => (
               <li key={range.id}>
                 <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer"
