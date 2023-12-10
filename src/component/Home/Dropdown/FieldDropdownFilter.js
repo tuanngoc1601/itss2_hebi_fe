@@ -33,7 +33,7 @@ const FieldDropdownFilter = (props) => {
     }, []);
 
     // Your array of companies
-    const fields = ["Tất cả lĩnh vực", "Design", "Marketing", "Bán lẻ", "Bảo hiểm", "Bảo trì"];
+    const fields = ["Tất cả lĩnh vực", "Design","Marketing","Bán lẻ","Bảo hiểm","Bảo trì","Cơ khí","Du lịch","Bất động sản","Chứng khoán","Dược phẩm","Giáo dục","Logistics","Mỹ phẩm","Quảng cáo","Sinh học","Thời trang","Thực phẩm","Y tế",];
     const filteredFields = fields.filter((field) =>
     field.toLowerCase().includes(searchTerm.toLowerCase())
 );
@@ -43,11 +43,12 @@ const FieldDropdownFilter = (props) => {
             <button
                 className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200"
                 type="button"
+                style={{width: "240px", display:"flex", alignItems: "center", justifyContent: "space-between"}}
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <IoIosCube className="text-xl mr-1" />
-                <span style={{ width: "98.55px" }}>
-                {props.field !== 'Tất cả lĩnh vực' ?  props.field: fields[0]}
+                <span style={{ width: "150px", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 1, overflow: "hidden", textOverflow: "ellipsis",}}>
+                {props.field !== "all" ?  props.field: fields[0]}
                 </span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
@@ -68,14 +69,16 @@ const FieldDropdownFilter = (props) => {
                             />
                         </div>
                     </div>
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="px-3 pb-3 overflow-y-auto text-sm text-gray-700"
+                    style={{ maxHeight: '300px' }}
+                    >
                         {filteredFields.map((field) => (
                             <li key={field}>
                                 <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                     <input
                                         id={field}
                                         type="radio"
-                                        value={field}
+                                        value={field === "Tất cả lĩnh vực" ? "all" : field}
                                         name="field"
                                         hidden
                                         onChange={handleOptionsChange}

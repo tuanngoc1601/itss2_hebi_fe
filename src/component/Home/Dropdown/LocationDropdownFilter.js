@@ -38,7 +38,7 @@ const LocationDropdownFilter = (props) => {
                 const response = await fetch("https://vapi.vnappmob.com/api/province/");
                 const data = await response.json();
 
-                // Thay vì thêm dữ liệu mới vào, hãy set lại toàn bộ mảng cities
+             
                 setCities([{
                     province_id: '00',
                     province_name: 'Tất cả tỉnh/thành phố',
@@ -53,7 +53,7 @@ const LocationDropdownFilter = (props) => {
         if (cities.length === 1) {
             fetchData();
         }
-    }, [cities]); // Thêm cities là dependency để gọi lại useEffect khi cities thay đổi
+    }, [cities]); 
 
     const filteredCities = cities.filter((city) =>
         city.province_name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -64,11 +64,12 @@ const LocationDropdownFilter = (props) => {
             <button
                 className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200"
                 type="button"
+                style={{width: "240px", display:"flex", alignItems: "center", justifyContent: "space-between"}}
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <CiLocationOn className="text-xl mr-1" />
-                <span style={{ width: "144.02px" }}>
-                    {props.location !== 'Tất cả tỉnh/thành phố' ?  props.location: cities[0].province_name}
+                <span style={{ width: "150px", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 1, overflow: "hidden", textOverflow: "ellipsis",}}>
+                    {props.location !== "all" ?  props.location: cities[0].province_name}
                 </span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
@@ -92,7 +93,9 @@ const LocationDropdownFilter = (props) => {
                             />
                         </div>
                     </div>
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="px-3 pb-3 overflow-y-auto text-sm text-gray-700"
+                    style={{ maxHeight: '300px' }}
+                    >
                         {filteredCities.map((city) => (
                             
                             <li key={city.index}>
@@ -105,7 +108,7 @@ const LocationDropdownFilter = (props) => {
                                     <input
                                         
                                         type="radio"
-                                        value={city.province_name}
+                                        value={city.province_name === "Tất cả tỉnh/thành phố"? "all" : city.province_name}
                                         name="city"
                                         hidden
                                         onChange={handleOptionsChange}

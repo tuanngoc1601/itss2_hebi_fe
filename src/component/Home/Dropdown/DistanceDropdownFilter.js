@@ -28,10 +28,11 @@ const DistanceDropdownFilter = () => {
             <button
                 className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200"
                 type="button"
+                style={{width: "240px", display:"flex", alignItems: "center", justifyContent: "space-between"}}
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <GiRoad className="text-xl mr-1" />
-                <span style={{ width: "131.27px" }}>Tất cả khoảng cách</span>
+                <span style={{ width: "150px", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 1, overflow: "hidden", textOverflow: "ellipsis",}}>Tất cả khoảng cách</span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}
@@ -64,7 +65,9 @@ const DistanceDropdownFilter = () => {
                             <span>km</span>
                         </div>
                     </div>
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="px-3 pb-3 overflow-y-auto text-sm text-gray-700"
+                    style={{ maxHeight: '300px' }}
+                    >
                         <li>
                             <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                 <input

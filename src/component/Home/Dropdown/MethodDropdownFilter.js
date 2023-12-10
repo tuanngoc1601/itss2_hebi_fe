@@ -27,43 +27,54 @@ const MethodDropdownFilter = (props) => {
         };
     }, []);
 
-    const methods =  ["Tất cả phương thức", "Trực tuyến", "Trực tiếp","Kết hợp"];
+    const methods =  [
+                    {value:"all", display:"Tất cả phương thức"},
+                    {value:"online", display:"Trực tuyến"},
+                    {value:"offline", display:"Trực tiếp"},
+                    {value:"hybrid", display:"Kết hợp"},];
 
     return (
         <div className="block">
             <button
                 className="text-black bg-white focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center border shadow-md shadow-gray-200"
                 type="button"
+                style={{width: "240px", display:"flex", alignItems: "center", justifyContent: "space-between"}}
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <div className="inline-block">
                     <img src={iconFilter} alt="filter" className="w-5 mr-1" />
                 </div>
-                <span style={{ width: "108.9px" }}>
-                {props.method !== 'Tất cả phương thức' ?  props.method: methods[0]}
+                <span style={{ width: "150px", display: "-webkit-box", WebkitBoxOrient: "vertical", WebkitLineClamp: 1, overflow: "hidden", textOverflow: "ellipsis",}}>
+                {props.method === "all" ? methods[0].display : 
+                props.method === "online" ? methods[1].display:
+                props.method === "offline" ? methods[2].display:
+                props.method === "hybrid" ? methods[3].display : methods[0].display
+            }
                     </span>
                 <FaChevronDown className="text-navActive text-lg ms-1" />
             </button>
             {/* dropdown */}
             {isOpen && (
                 <div ref={dropdownRef} className="absolute z-10 mt-2 origin-top bg-white rounded-lg shadow w-60">
-                    <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700">
+                    <ul className="px-3 pb-3 overflow-y-auto text-sm text-gray-700"
+                    style={{ maxHeight: '300px' }}
+                    >
                         {methods.map((method) => (
-                            <li key={method}>
+                            <li key={method.value}>
                                 <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                     <input
-                                        id={method}
+                                        id={method.value}
                                         type="radio"
-                                        value={method}
+                                        value={method.value}
                                         name="method"
                                         hidden
                                         onChange={handleOptionsChange}
                                     />
                                     <label
-                                        htmlFor={method}
+                                        htmlFor={method.value}
                                         className="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded"
                                     >
-                                        {method}
+                                        {method.display}
                                     </label>
                                 </div>
                             </li>
