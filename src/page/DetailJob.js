@@ -11,7 +11,7 @@ import JobHeaderInfoContainer from "../component/DetailJob//JobHeaderInfoContain
 import JobImageContainer from "../component/DetailJob//JobImageContainer";
 import JobContainerFormFilter from "../component/DetailJob//JobContainerFormFilter";
 import DescriptionContainer from "../component/DetailJob//DescriptionContainer";
-import Header from "../component/DetailJob/Header";
+import Header from "../component/Header/Header.js";
 
 const DetailJob = () => {
   const action = useNavigationType();
@@ -90,23 +90,8 @@ const DetailJob = () => {
           />
         </div>
       </div>
-      <div className="absolute w-full top-[1785px] right-[38px] left-[-38px] box-border h-[34px] border-t-[1px] border-solid border-gainsboro-100" />
       <div className="absolute top-[1809px] left-[354px] w-[1170px] h-[79px]" />
       <main className="absolute top-[0px] left-[14px] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] w-[1921px] h-[1780px] overflow-hidden text-left text-base text-gray-100 font-font-awesome-5-free">
-        <div className="absolute top-[47px] left-[calc(50%_+_173.5px)] w-[791px] h-[260px] flex flex-col items-start justify-start max-w-[1340px]">
-          <div className="relative w-[491.64px] h-6">
-            <div className="absolute top-[4px] left-[0px] leading-[16px]">
-              
-            </div>
-            <div className="absolute top-[0px] left-[16px] leading-[24px] font-quicksand">{` Dịch vụ `}</div>
-            <div className="absolute top-[4px] left-[83.78px] leading-[16px]">
-              
-            </div>
-            <div className="absolute top-[0px] left-[108.15px] leading-[24px] font-quicksand">
-              10-40
-            </div>
-          </div>
-        </div>
         <div className="absolute top-[82px] left-[calc(50%_+_353.67px)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] h-[394px] overflow-hidden flex flex-col items-end justify-start p-4 box-border">
           <CompanyGroupCard />
         </div>
@@ -155,11 +140,6 @@ const DetailJob = () => {
           </div>
         </div>
         <DescriptionContainer />
-        <img
-          className="absolute top-[19px] left-[1636px] w-[50px] h-[49px] object-cover"
-          alt=""
-          src="/image-14@2x.png"
-        />
         <Header />
       </main>
     </div>
