@@ -1,6 +1,6 @@
 import React from "react";
 import CompanyItem from "./CompanyItem";
-import PaginationPage from "./pagination/PaginationPage";
+import PaginationPage from "../Common/PaginationPage";
 import { useState } from "react";
 
 const ListCompanies = ({jobList}) => {  
