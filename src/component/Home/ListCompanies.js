@@ -18,7 +18,6 @@ const ListCompanies = ({jobList}) => {
                 {currentJobs.map((currentJob) =>(
                     <CompanyItem companyItem={currentJob}/>
                 ))}
-                
             </div>
             <div className="w-11/12 mx-auto flex flex-row justify-center items-center ">
                 <PaginationPage
