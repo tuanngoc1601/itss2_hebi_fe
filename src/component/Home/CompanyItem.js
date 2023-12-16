@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlineDollar } from "react-icons/ai";
+import { Link } from 'react-router-dom';    
 
 const CompanyItem = ({ companyItem }) => {
     const currentDate = new Date();
@@ -7,7 +8,7 @@ const CompanyItem = ({ companyItem }) => {
     const timeDiffInDays = Math.floor((currentDate - updatedAtDate) / (1000 * 60 * 60 * 24));
 
     const day = updatedAtDate.getDate();
-    const month = updatedAtDate.getMonth() + 1; // Months are zero-based
+    const month = updatedAtDate.getMonth() + 1;
     const year = updatedAtDate.getFullYear();
     const hours = updatedAtDate.getHours();
     const minutes = updatedAtDate.getMinutes();
@@ -24,9 +25,11 @@ const CompanyItem = ({ companyItem }) => {
                 <img src={companyItem.business_logo} alt="company" className="" />
             </div>
             <div className="flex flex-col p-3" style={{ width: "70%" }}>
-                <h4 className="text-base font-semibold">
-                    {companyItem.title}
-                </h4>
+                <Link to={`/detail-job/${companyItem.id}`}>
+                    <h4 className="text-base font-semibold">
+                        {companyItem.title}
+                    </h4>
+                </Link>
                 <h5 className="text-sm font-normal">
                     {companyItem.business_name}
                 </h5>

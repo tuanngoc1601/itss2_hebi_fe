@@ -1,53 +1,135 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import {
+  Grid,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Modal,
+  IconButton,
+  Box,
+} from '@mui/material';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import CloseIcon from '@mui/icons-material/Close';
 
-const JobImageContainer = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+const JobImageContainer = ({ images }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  const imageUrls = [
-    "https://via.placeholder.com/276x184.png",
-    "https://via.placeholder.com/276x184",
-    "https://via.placeholder.com/276x184.jpg",
-  ];
+  const limitedImages = images.slice(0, 3);
+  const remainingImagesCount = images.length - 3;
 
-  const handleImageClick = (imageUrl) => {
-    // Xử lý khi click vào ảnh
-    setSelectedImage(imageUrl);
+  const handleShowModal = (index) => {
+    setSelectedImageIndex(index);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleNextImage = () => {
+    setSelectedImageIndex((prevIndex) =>
+      prevIndex < images.length - 1 ? prevIndex + 1 : 0
+    );
+  };
+
+  const handlePrevImage = () => {
+    setSelectedImageIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : images.length - 1
+    );
   };
 
   return (
-    <div className="self-stretch overflow-hidden flex flex-row items-center justify-start py-0 gap-[4px]">
-      {imageUrls.map((imageUrl, index) => (
-        <div
-          key={index}
-          className="w-[281.78px] flex flex-col items-start justify-start py-0 pr-[5.779998779296875px] pl-0 box-border relative"
-        >
-          <div className="flex flex-row items-center justify-start">
-            <img
-              className="relative w-[276px] h-[184px] object-cover cursor-pointer"
-              alt={`Company Image ${index + 1}`}
-              src={imageUrl}
-              onClick={() => handleImageClick(imageUrl)}
+    <Grid container spacing={1.5} style={{ marginTop: '10px' }}>
+      {limitedImages.map((imageUrl, index) => (
+        <Grid item key={index} xs={12} sm={6} md={4} onClick={() => handleShowModal(index)}>
+          <Card>
+            <CardMedia
+              component="img"
+              style={{ objectFit: 'cover', height: '150px' }}
+              image={imageUrl}
+              alt={`Image ${index}`}
             />
-          </div>
-          {selectedImage === imageUrl && (
-            <>
-              <img
-                className="absolute my-0 mx-[!important] h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] max-w-full overflow-hidden max-h-full opacity-[0.5] z-[1]"
-                alt="Overlay"
-                src="/divimgoverlay.svg"
-              />
-              <div className="my-0 mx-[!important] absolute h-[6.17%] w-[6.03%] top-[46.91%] right-[43.61%] bottom-[46.91%] left-[50.36%] flex flex-col items-start justify-start z-[2]">
-                <img
-                  className="relative w-[16.99px] h-[11.36px]"
-                  alt="Overlay Icon"
-                  src="/2.svg"
-                />
-              </div>
-            </>
-          )}
-        </div>
+          </Card>
+        </Grid>
       ))}
-    </div>
+      {/* {remainingImagesCount > 0 && (
+        <Grid item xs={12} sm={6} md={4} onClick={() => handleShowModal(2)}>
+          <Card style={{ position: 'relative' }}>
+            <CardMedia
+              component="img"
+              style={{ objectFit: 'cover', height: '150px', opacity: 0.4 }}
+              image={images[2]}
+            />
+            <CardContent
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                background: 'rgba(0, 0, 0, 0.6)',
+                color: '#fff',
+              }}
+            >
+              <Typography variant="h6">+{remainingImagesCount}</Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      )} */}
+
+      <Modal open={showModal} onClose={handleCloseModal}>
+        <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+          <IconButton
+            sx={{ position: 'absolute', top: 0, right: 0 ,'&:hover': {
+              color:"#000",
+              backgroundColor: 'rgba(255, 255, 255, 0.5)', // Màu nền khi hover
+            },}}
+            onClick={handleCloseModal}
+          >
+            <CloseIcon style={{ fontSize: "60px" }} />
+          </IconButton>
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: 0,
+              '&:hover': {
+                color:"#000",
+                backgroundColor: 'rgba(255, 255, 255, 0.5)', // Màu nền khi hover
+              },
+            }}
+            onClick={handlePrevImage}
+            color="#fff"
+          >
+            <KeyboardArrowLeftIcon style={{fontSize: "60px" }} />
+          </IconButton>
+          <img src={images[selectedImageIndex]} alt={`Large Image ${selectedImageIndex}`} style={{ height: "600px", width: "800px" }} />
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              right: 0,
+              '&:hover': {
+                color: "#000",
+                backgroundColor: 'rgba(255, 255, 255, 0.5)', // Màu nền khi hover
+              },
+            }}
+            onClick={handleNextImage}
+            color="#fff"
+          >
+            <KeyboardArrowRightIcon style={{fontSize: "60px" }} />
+          </IconButton>
+
+        </Box>
+      </Modal>
+    </Grid>
   );
 };
 

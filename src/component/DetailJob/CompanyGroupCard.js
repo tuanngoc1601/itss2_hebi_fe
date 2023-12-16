@@ -1,87 +1,68 @@
-import React, { useCallback, useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 
-const CompanyGroupCard = ({ companyId }) => {
-  const [companyDetails, setCompanyDetails] = useState(null);
-
-  const fetchCompanyDetails = useCallback(async () => {
-    try {
-      const response = await axios.get(`/api/companies/${companyId}`);
-      setCompanyDetails(response.data);
-    } catch (error) {
-      console.error("Error fetching company details:", error);
-    }
-  }, [companyId]);
-
-  useEffect(() => {
-    fetchCompanyDetails();
-  }, [fetchCompanyDetails]);
-
-  if (!companyDetails) {
-    return <div>Loading...</div>;
-  }
+const CompanyGroupCard = ({ company }) => {
+  const daysOfWeek = [
+    'Chủ Nhật',
+    'Thứ Hai',
+    'Thứ Ba',
+    'Thứ Tư',
+    'Thứ Năm',
+    'Thứ Sáu',
+    'Thứ Bảy',
+  ];
+  const formatDay = (day) => daysOfWeek[day];
 
   return (
-    <div className="relative rounded-lg bg-white shadow-[0px_6px_32px_rgba(0,_0,_0,_0.08)] w-[422.66px] h-[433.8px] text-left text-lg text-gray-300 font-lexend">
-      {/* Thông tin chung của công ty */}
-      <div className="absolute w-[calc(100%_-_40px)] top-[204px] right-[20px] left-[20px] flex flex-col items-center justify-start">
-        <CompanyInfoItem
-          icon="/quy-m-cng-ty.svg"
-          value={companyDetails.employee_number}
-        />
-        <CompanyInfoItem icon="/1000-nhn-vin.svg" value={companyDetails.name} />
-        <CompanyInfoItem icon="/quc-gia.svg" value={companyDetails.country} />
-        <CompanyInfoItem
-          icon="/thi-gian-lm-vic.svg"
-          value={`${companyDetails.start_week_day} - ${companyDetails.end_week_day}`}
-        />
-      </div>
-
-      {/* Thông tin liên quan đến đội nhóm */}
-      <div className="absolute top-[370px] left-[6px] w-[417px] h-10 flex flex-row flex-wrap items-start justify-start py-2 px-0 box-border">
-        <div className="flex-1 h-6 max-w-[406.6600036621094px]" />
-      </div>
-
-      {/* Logo và tên công ty */}
-      <div className="absolute w-[calc(100%_-_40px)] top-[13px] right-[20px] left-[20px] flex flex-row items-start justify-start py-0 pr-[128.66000366210938px] pl-0 box-border cursor-pointer">
-        <div className="flex flex-col items-start justify-start">
-          <div className="flex flex-row items-center justify-start">
+    <Card sx={{ width: "100%", marginTop: "5px", marginLeft: "15%" }}>
+      <CardContent>
+        <Typography sx={{ fontSize: 20, fontWeight: "bold", maxHeight: '100px' }} color="black" gutterBottom>
+          <div className="flex items-center">
             <img
-              className="relative rounded w-[120px] h-[120px] object-cover"
-              alt=""
-              src="/logo20vietteljpg@2x.png"
+              src={company.business_logo}
+              alt="company"
+              style={{ width: "80px", height: "80px", marginRight: "10px", border: "1px solid #DEE2E6", objectFit: 'contain', backgroundColor:"#fff" }}
             />
-          </div>
-        </div>
-        <div className="flex flex-col items-start justify-start py-0 pr-0 pl-3">
-          <div className="self-stretch overflow-hidden flex flex-col items-start justify-start pt-1 px-0 pb-0">
-            <b className="relative leading-[27px]">{companyDetails.name}</b>
-          </div>
-          <div className="flex flex-row items-start justify-start text-base text-darkorchid">
-            <div className="flex flex-row items-center justify-start py-0 pr-[0.55999755859375px] pl-0">
-              <div className="flex flex-col items-start justify-start">
-                <div className="relative leading-[24px]">Xem công ty</div>
-              </div>
-              <div className="flex flex-col items-start justify-start pt-0 pb-0.5 pr-0 pl-2 ml-[-0.61px]">
-                <img
-                  className="relative w-4 h-4 overflow-hidden shrink-0"
-                  alt=""
-                  src="/svg.svg"
-                />
-              </div>
+            <div>
+              <h4 className="text-base font-bold" style={{ fontSize: "16px" }}>{company.name}</h4>
+              <a href={company.website} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit', fontSize: '14px', color: "#B511B8" }}>
+                Xem công ty
+                <OpenInNewOutlinedIcon style={{ marginLeft: '5px', fontSize: '14px' }} />
+              </a>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </Typography>
+        <Typography component="div" variant="body1" style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px', padding: "5px 0", borderBottom: '1px dashed #DEDEDE' }}>
+          <div>
+            <p style={{ margin: 0, color: "#A6A6A6", fontSize: "14px" }}>Quy mô công ty</p>
+          </div>
+          <div>
+            <p style={{ margin: 0, fontWeight: 'bold', fontSize: "14px" }}>{company.employees_number} nhân viên</p>
+          </div>
+        </Typography>
+        <Typography component="div" variant="body1" style={{ display: 'flex', justifyContent: 'space-between', padding: "5px 0", borderBottom: '1px dashed #DEDEDE' }}>
+          <div>
+            <p style={{ margin: 0, color: "#A6A6A6", fontSize: "14px" }}>Quốc gia</p>
+          </div>
+          <div>
+            <p style={{ margin: 0, fontWeight: 'bold', fontSize: "14px" }}>{company.country}</p>
+          </div>
+        </Typography>
+        <Typography component="div" variant="body1" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', padding: "5px 0", borderBottom: '1px dashed #DEDEDE' }}>
+          <div>
+            <p style={{ margin: 0, color: "#A6A6A6", fontSize: "14px" }}>Thời gian làm việc</p>
+          </div>
+          <div>
+            <p style={{ margin: 0, fontWeight: 'bold', fontSize: "14px" }}>{formatDay(company.start_week_day)} - {formatDay(company.end_week_day)}</p>
+          </div>
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 
-const CompanyInfoItem = ({ icon, value }) => (
-  <div className="self-stretch flex-1 flex flex-col items-start justify-start pt-0.5 pb-0 pr-[67.33000183105469px] pl-0 box-border max-w-[382.6600036621094px]">
-    <img className="relative w-[122.43px] h-[15.73px]" alt="" src={icon} />
-    <span>{value}</span>
-  </div>
-);
 
 export default CompanyGroupCard;

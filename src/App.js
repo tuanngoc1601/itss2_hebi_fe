@@ -12,7 +12,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/sign-up" element={<Signup />} />
         <Route path="/" element={<Home />} />
-        <Route exact path="/detail-job" element={<DetailJob />} />
+        <Route exact path="/detail-job/:companyId" element={<DetailJob />} />
       </Routes>
     </div>
   );
