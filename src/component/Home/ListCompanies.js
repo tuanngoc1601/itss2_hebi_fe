@@ -1,6 +1,6 @@
 import React from "react";
 import CompanyItem from "./CompanyItem";
-import PaginationPage from "./pagination/PaginationPage";
+import PaginationPage from "../Common/PaginationPage";
 import { useState } from "react";
 
 const ListCompanies = ({jobList}) => {  
@@ -18,7 +18,6 @@ const ListCompanies = ({jobList}) => {
                 {currentJobs.map((currentJob) =>(
                     <CompanyItem companyItem={currentJob}/>
                 ))}
-                
             </div>
             <div className="w-11/12 mx-auto flex flex-row justify-center items-center ">
                 <PaginationPage

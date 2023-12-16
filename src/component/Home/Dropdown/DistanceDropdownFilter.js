@@ -69,7 +69,7 @@ const DistanceDropdownFilter = () => {
                     style={{ maxHeight: '300px' }}
                     >
                         <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
+                            <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                 <input
                                     id="all"
                                     type="radio"
@@ -86,7 +86,7 @@ const DistanceDropdownFilter = () => {
                             </div>
                         </li>
                         <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
+                            <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                 <input
                                     id="1"
                                     type="radio"
@@ -103,7 +103,7 @@ const DistanceDropdownFilter = () => {
                             </div>
                         </li>
                         <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
+                            <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                 <input
                                     id="3"
                                     type="radio"
@@ -120,7 +120,7 @@ const DistanceDropdownFilter = () => {
                             </div>
                         </li>
                         <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
+                            <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                 <input
                                     id="6"
                                     type="radio"
@@ -137,7 +137,7 @@ const DistanceDropdownFilter = () => {
                             </div>
                         </li>
                         <li>
-                            <div class="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
+                            <div className="flex items-center ps-2 rounded hover:bg-gray-100 cursor-pointer">
                                 <input
                                     id="9"
                                     type="radio"
