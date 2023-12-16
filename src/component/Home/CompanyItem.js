@@ -34,20 +34,20 @@ const CompanyItem = ({ companyItem }) => {
                     {companyItem.business_name}
                 </h5>
                 <div className="flex flex-wrap items-center justify-start gap-1 mt-6">
-                    <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">{companyItem.location}</span>
+                    <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                        <span className="">{companyItem.location}</span>
                     </div>
-                    <div class="relative g  rid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">{companyItem.industry}</span>
+                    <div className="relative g  rid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                        <span className="">{companyItem.industry}</span>
                     </div>
-                    <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">{companyItem.field}</span>
+                    <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                        <span className="">{companyItem.field}</span>
                     </div>
-                    <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">Thời gian thực tập {companyItem.internship_duration} tháng</span>
+                    <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                        <span className="">Thời gian thực tập {companyItem.internship_duration} tháng</span>
                     </div>
-                    <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">
+                    <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                        <span className="">
                             {(() => {
                                 if (companyItem.internship_method === "online") {
                                     return "Trực tuyến";
@@ -59,11 +59,11 @@ const CompanyItem = ({ companyItem }) => {
                             })()}
                         </span>
                     </div>
-                    <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">Khoảng cách 3km</span>
+                    <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                        <span className="">Khoảng cách 3km</span>
                     </div>
-                    <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">
+                    <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                        <span className="">
                             {(() => {
                                 if (companyItem.internship_type === "fulltime") {
                                     return "Toàn thời gian";
@@ -73,11 +73,11 @@ const CompanyItem = ({ companyItem }) => {
                             })()}
                         </span>
                     </div>
-                    <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">Thời gian cập nhật {timeDiffInDays} ngày trước</span>
+                    <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                        <span className="">Thời gian cập nhật {timeDiffInDays} ngày trước</span>
                     </div>
-                    <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
-                        <span class="">Số lượng tuyển dụng {companyItem.recruitment_number}</span>
+                    <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                        <span className="">Số lượng tuyển dụng {companyItem.recruitment_number}</span>
                     </div>
                 </div>
             </div>
@@ -86,9 +86,9 @@ const CompanyItem = ({ companyItem }) => {
                     <p className="flex items-center justify-end text-sm font-semibold text-navActive gap-1">
                         <AiOutlineDollar className="text-lg text-gray-700" />
                         {(() => {
-                            if (companyItem.salary == null) {
+                            if (companyItem.salary === null) {
                                 return "Thỏa thuận";
-                            } else if (companyItem.salary == 0.0) {
+                            } else if (companyItem.salary === 0.0) {
                                 return "Không lương";
                             } else {
                                 return companyItem.salary;

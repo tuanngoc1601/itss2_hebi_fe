@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./page/Login";
 import Signup from "./page/Signup";
 import Home from "./page/Home";
+import Reviews from "./page/Reviews";
 import DetailJob from "./page/DetailJob";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/sign-up" element={<Signup />} />
         <Route path="/" element={<Home />} />
         <Route exact path="/detail-job/:companyId" element={<DetailJob />} />
+          <Route path="/reviews" element={<Reviews />} />
       </Routes>
     </div>
   );

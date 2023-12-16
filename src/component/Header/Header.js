@@ -60,7 +60,7 @@ const Header = () => {
                             </li>
                             <li>
                                 <NavLink
-                                    to="/review"
+                                    to="/reviews"
                                     className={({ isActive }) =>
                                         [
                                             isActive ? "text-navActive" : "",
