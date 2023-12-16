@@ -1,15 +1,46 @@
 import React, { useRef, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
+import axios from 'axios';
 
-const SearchTerm = () => {
+const SearchTerm = (props) => {
     const [searchKey, setSearchKey] = useState("");
-    const [listKey, setListKey] = useState(["Sam Sung"]);
+    const [listKey, setListKey] = useState([]);
     const inputSearchRef = useRef(null);
 
     const handleSearchKey = (e) => {
         setSearchKey(e.target.value);
     };
+    const handleSearch = () => {
+        console.log(props.sortKey)
+        console.log(listKey)
+        {
+            const fetchData = async () => {
+              try {
+                
+        
+                // Tạo một đối tượng params với các thuộc tính là các phần tử của mảng
+                const params = {sort: props.sortKey,};
+                listKey.forEach((value, index) => {
+                  params[`search[${index}]`] = value;
+                });
+        
+                // Thực hiện HTTP GET request với mảng dữ liệu truyền vào làm các tham số
+                const response = await axios.get('http://127.0.0.1:8000/api/review-search', {
+                  params,
+                });
+        
+                
+                props.setSearchedData(response.data);
+              } catch (error) {
+                console.error('Error fetching data:', error);
+              }
+            };
+        
+            fetchData();
+          }
+
+    }
 
     const handleAddSearchKey = () => {
         let newListKey = [...listKey];
@@ -36,7 +67,10 @@ const SearchTerm = () => {
                 >
                     <IoMdAdd className="text-xl text-navActive" />
                 </span>
-                <span className="flex-none w-10 h-10 flex justify-center items-center cursor-pointer rounded bg-gray-200">
+                <span 
+                className="flex-none w-10 h-10 flex justify-center items-center cursor-pointer rounded bg-gray-200"
+                onClick = {handleSearch}
+                >
                     <IoSearchSharp className="text-xl text-navActive" />
                 </span>
             </div>
