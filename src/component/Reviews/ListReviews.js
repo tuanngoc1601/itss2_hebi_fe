@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import ReviewItem from "./ReviewItem";
 import PaginationPage from "../Common/PaginationPage";
 
-const ListReviews = () => {
+const ListReviews = (props) => {
     const [arrange, setArrange] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
+    const reviewData = props.searchedData
+
     const totalPages = 10;
 
     const onChangeArrangeOption = (e) => {
         setArrange(e.target.value);
+        props.setSortKey(e.target.value);
     }
 
     return (
@@ -21,8 +24,8 @@ const ListReviews = () => {
                             type="radio"
                             id="like_quantity"
                             name="arrange"
-                            value="1"
-                            checked={arrange === "1"}
+                            value="like"
+                            checked={arrange === "like"}
                             onChange={onChangeArrangeOption}
                             className="cursor-pointer"
                         />
@@ -35,8 +38,8 @@ const ListReviews = () => {
                             type="radio"
                             id="post_date"
                             name="arrange"
-                            value="2"
-                            checked={arrange === "2"}
+                            value="date"
+                            checked={arrange === "date"}
                             onChange={onChangeArrangeOption}
                             className="cursor-pointer"
                         />
@@ -47,10 +50,18 @@ const ListReviews = () => {
                 </div>
             </div>
             <div className="w-full flex flex-col justify-center items-start gap-3 mt-4">
-                <ReviewItem />
-                <ReviewItem />
-                <ReviewItem />
-                <ReviewItem />
+            {reviewData.map((review, index) => (
+                <ReviewItem
+                key={index} 
+                reviewTitle={review.review_title}
+                reviewerName={review.reviewer_name}
+                commentCount={review.comment_count}
+                likeCount={review.like_count}
+                dislikeCount={review.dislike_count}
+                reviewText={review.review_text}
+                />
+            ))}
+                
             </div>
             <div className="w-full flex flex-row justify-center items-center">
                 <PaginationPage
