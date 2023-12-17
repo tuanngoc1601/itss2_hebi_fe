@@ -12,9 +12,8 @@ const SearchTerm = (props) => {
         setSearchKey(e.target.value);
     };
     const handleSearch = () => {
-        console.log(props.sortKey)
-        console.log(listKey)
-        {
+            
+        
             const fetchData = async () => {
               try {
                 
@@ -38,7 +37,7 @@ const SearchTerm = (props) => {
             };
         
             fetchData();
-          }
+          
 
     }
 
@@ -46,6 +45,7 @@ const SearchTerm = (props) => {
         let newListKey = [...listKey];
         newListKey.push(searchKey);
         setListKey(newListKey);
+        props.setListKey(newListKey)
         setSearchKey("");
         inputSearchRef.current.focus();
     };

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import ReviewItem from "./ReviewItem";
 import PaginationPage from "../Common/PaginationPage";
+import axios from "axios";
 
 const ListReviews = (props) => {
-    const [arrange, setArrange] = useState("");
+    const [arrange, setArrange] = useState("like");
     const [currentPage, setCurrentPage] = useState(1);
     const reviewData = props.searchedData
 
@@ -12,6 +13,30 @@ const ListReviews = (props) => {
     const onChangeArrangeOption = (e) => {
         setArrange(e.target.value);
         props.setSortKey(e.target.value);
+        const fetchData = async () => {
+            try {
+              
+      
+              // Tạo một đối tượng params với các thuộc tính là các phần tử của mảng
+              const params = {sort: e.target.value,};
+              props.listKey.forEach((value, index) => {
+                params[`search[${index}]`] = value;
+              });
+      
+              // Thực hiện HTTP GET request với mảng dữ liệu truyền vào làm các tham số
+              const response = await axios.get('http://127.0.0.1:8000/api/review-search', {
+                params,
+              });
+      
+              
+              props.setSearchedData(response.data);
+            } catch (error) {
+              console.error('Error fetching data:', error);
+            }
+          };
+      
+          fetchData();
+        
     }
 
     return (
@@ -59,9 +84,13 @@ const ListReviews = (props) => {
                 likeCount={review.like_count}
                 dislikeCount={review.dislike_count}
                 reviewText={review.review_text}
+                isAnonymous={review.is_anonymous}
+                createdAtDate={review.created_at}
+                ListKey={props.listKey}
                 />
-            ))}
                 
+            ))}
+               
             </div>
             <div className="w-full flex flex-row justify-center items-center">
                 <PaginationPage
