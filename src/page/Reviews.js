@@ -19,7 +19,7 @@ const Reviews = () => {
         }
       };
     
-      const [searchedData, setSearchedData] = React.useState(fetchData);
+      const [searchedData, setSearchedData] = React.useState([]);
        
 
     
@@ -47,6 +47,7 @@ const Reviews = () => {
                 setSearchedData = {setSearchedData}
                 listKey = {listKey}
                 setListKey = {setListKey}
+                searchedData = {searchedData}
                 />
                 <ListReviews 
                 sortKey = {sortKey}
