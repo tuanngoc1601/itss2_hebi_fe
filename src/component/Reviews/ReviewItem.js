@@ -2,13 +2,52 @@ import React from "react";
 import { AiOutlineComment } from "react-icons/ai";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 
+
 const ReviewItem = (props) => {
+
+    // const day = props.createdAtDate.getDate();
+    // const month = props.createdAtDate.getMonth() + 1; // Months are zero-based
+    // const year = props.createdAtDate.getFullYear();
+    
+
+    // // Format the final string
+    // const formattedDate = `${day}-${month}-${year}`;
+
+    const KeywordHighlighter = ({ text, keywords }) => {
+        const highlightKeywords = (text, keywords) => {
+          if (keywords.length === 0) {
+            return <span>{text}</span>;
+          }
+      
+          const regex = new RegExp(`(${keywords.join('|')})`, 'gi');
+      
+          return text.split(regex).map((word, index) => {
+            const isKeyword = regex.test(word);
+            const key = `${word}_${index}`;
+      
+            return isKeyword ? (
+              <span key={key} style={{ backgroundColor: 'yellow' }}>{word}</span>
+            ) : (
+              <span key={key}>{word}</span>
+            );
+          });
+        };
+      
+        return (
+          <div>
+            {highlightKeywords(text, keywords)}
+          </div>
+        );
+      };
+
     return (
-        <div className="flex flex-col justify-center items-start p-3 border shadow rounded-md cursor-pointer">
+        <div className="flex flex-col justify-center items-start p-3 border shadow rounded-md cursor-pointer"
+             style={{width:"760px"}}
+        >
             <h4 className="text-md font-semibold text-navActive">
                 {props.reviewTitle}
             </h4>
-            <p className="text-xs mt-1">23-11-2023 | {props.reviewerName}</p>
+            <p className="text-xs mt-1">12-12-2012 | {props.isAnonymous == 1? "Người dùng ẩn danh" : props.reviewerName}</p>
             <div className="flex flex-row justify-start items-center gap-x-6 my-1">
                 <p className="flex text-sm items-center cursor-pointer hover:underline hover:decoration-navActive hover:text-navActive px-3 py-1">
                     {props.commentCount}{" "}
@@ -30,7 +69,8 @@ const ReviewItem = (props) => {
                 </p>
             </div>
             <p className="text-sm">
-               {props.reviewText}
+               
+               <KeywordHighlighter text={props.reviewText} keywords={props.listKey} />
             </p>
         </div>
     );
