@@ -14,39 +14,46 @@ const ReviewItem = (props) => {
     // const formattedDate = `${day}-${month}-${year}`;
 
     const removeDiacritics = (str) => {
-        return str
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '');
-      };
-      
-      const KeywordHighlighter = ({ text, keywords }) => {
-        const highlightKeywords = (text, keywords) => {
-          if (keywords.length === 0) {
-            return <span>{text}</span>;
-          }
-      
-          const cleanedText = removeDiacritics(text.toLowerCase()); // Chuyển văn bản thành chữ thường và loại bỏ dấu
-          const cleanedKeywords = keywords.map(keyword => removeDiacritics(keyword.toLowerCase())); // Chuyển từ khóa thành chữ thường và loại bỏ dấu
-          const regex = new RegExp(`(${cleanedKeywords.join('|')})`, 'gi');
-      
-          return cleanedText.split(regex).map((word, index) => {
-            const isKeyword = regex.test(word);
-            const key = `${word}_${index}`;
-      
-            return isKeyword ? (
-              <span key={key} style={{ backgroundColor: 'yellow' }}>{text.substr(index, word.length)}</span>
-            ) : (
-              <span key={key}>{word}</span>
-            );
-          });
-        };
-      
-        return (
-          <div>
-            {highlightKeywords(text, keywords)}
-          </div>
-        );
-      };
+      return str
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    };
+    
+    const KeywordHighlighter = ({ text, keywords }) => {
+      if (keywords.length === 0) {
+        return <span>{text}</span>;
+      }
+    
+      const cleanedText = removeDiacritics(text);
+      const cleanedKeywords = keywords.map(keyword => removeDiacritics(keyword));
+      const regex = new RegExp(`(${cleanedKeywords.join('|')})`, 'gi');
+    
+      let lastIndex = 0;
+      const result = [];
+    
+      cleanedText.split(regex).forEach((word, index) => {
+        const isKeyword = regex.test(word);
+    
+        if (isKeyword) {
+          const keywordIndex = cleanedKeywords.findIndex(kw => removeDiacritics(kw) === word);
+          const keyword = keywords[keywordIndex];
+    
+          result.push(
+            <span key={`${keyword}_${index}`} style={{ backgroundColor: 'yellow' }}>
+              {text.substr(lastIndex, word.length)}
+            </span>
+          );
+    
+          lastIndex += word.length;
+        } else {
+          const originalWord = text.substr(lastIndex, word.length);
+          result.push(<span key={`${originalWord}_${index}`}>{originalWord}</span>);
+          lastIndex += word.length;
+        }
+      });
+    
+      return <div>{result}</div>;
+    };
 
     return (
         <div className="flex flex-col justify-center items-start p-3 border shadow rounded-md cursor-pointer"
