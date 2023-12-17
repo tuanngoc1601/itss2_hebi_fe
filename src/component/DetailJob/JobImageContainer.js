@@ -45,52 +45,63 @@ const JobImageContainer = ({ images }) => {
     <Grid container spacing={1.5} style={{ marginTop: '10px' }}>
       {limitedImages.map((imageUrl, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} onClick={() => handleShowModal(index)}>
-          <Card>
-            <CardMedia
-              component="img"
-              style={{ objectFit: 'cover', height: '150px' }}
-              image={imageUrl}
-              alt={`Image ${index}`}
-            />
-          </Card>
+          {index < 2 ? (
+            <Card>
+              <CardMedia
+                component="img"
+                style={{ objectFit: 'cover', height: '150px' }}
+                image={imageUrl}
+                alt={`Image ${index}`}
+              />
+            </Card>
+          ) : (
+            remainingImagesCount !== 0 ? (
+              <Card style={{ position: 'relative' }}>
+              <CardMedia
+                component="img"
+                style={{ objectFit: 'cover', height: '150px', opacity: 0.4 }}
+                image={images[2]}
+              />
+              <CardContent
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  background: 'rgba(0, 0, 0, 0.6)',
+                  color: '#fff',
+                }}
+              >
+                <Typography variant="h6">+{remainingImagesCount}</Typography>
+              </CardContent>
+            </Card>
+            ):(
+              <Card>
+              <CardMedia
+                component="img"
+                style={{ objectFit: 'cover', height: '150px' }}
+                image={imageUrl}
+                alt={`Image ${index}`}
+              />
+            </Card>
+            )   
+          )}
         </Grid>
       ))}
-      {/* {remainingImagesCount > 0 && (
-        <Grid item xs={12} sm={6} md={4} onClick={() => handleShowModal(2)}>
-          <Card style={{ position: 'relative' }}>
-            <CardMedia
-              component="img"
-              style={{ objectFit: 'cover', height: '150px', opacity: 0.4 }}
-              image={images[2]}
-            />
-            <CardContent
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                background: 'rgba(0, 0, 0, 0.6)',
-                color: '#fff',
-              }}
-            >
-              <Typography variant="h6">+{remainingImagesCount}</Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      )} */}
-
       <Modal open={showModal} onClose={handleCloseModal}>
         <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
           <IconButton
-            sx={{ position: 'absolute', top: 0, right: 0 ,'&:hover': {
-              color:"#000",
-              backgroundColor: 'rgba(255, 255, 255, 0.5)', // Màu nền khi hover
-            },}}
+            sx={{
+              position: 'absolute', top: 0, right: 0, '&:hover': {
+                color: "#000",
+                backgroundColor: 'rgba(255, 255, 255, 0.5)', // Màu nền khi hover
+              },
+            }}
             onClick={handleCloseModal}
           >
             <CloseIcon style={{ fontSize: "60px" }} />
@@ -101,14 +112,14 @@ const JobImageContainer = ({ images }) => {
               top: '50%',
               left: 0,
               '&:hover': {
-                color:"#000",
+                color: "#000",
                 backgroundColor: 'rgba(255, 255, 255, 0.5)', // Màu nền khi hover
               },
             }}
             onClick={handlePrevImage}
             color="#fff"
           >
-            <KeyboardArrowLeftIcon style={{fontSize: "60px" }} />
+            <KeyboardArrowLeftIcon style={{ fontSize: "60px" }} />
           </IconButton>
           <img src={images[selectedImageIndex]} alt={`Large Image ${selectedImageIndex}`} style={{ height: "600px", width: "800px" }} />
           <IconButton
@@ -124,7 +135,7 @@ const JobImageContainer = ({ images }) => {
             onClick={handleNextImage}
             color="#fff"
           >
-            <KeyboardArrowRightIcon style={{fontSize: "60px" }} />
+            <KeyboardArrowRightIcon style={{ fontSize: "60px" }} />
           </IconButton>
 
         </Box>

@@ -25,7 +25,7 @@ const CompanyItem = ({ companyItem }) => {
                 <img src={companyItem.business_logo} alt="company" className="" />
             </div>
             <div className="flex flex-col p-3" style={{ width: "70%" }}>
-                <Link to={`/detail-job/${companyItem.id}`}>
+                <Link to={`/detail-job/${companyItem.id}`} onClick={() => {window.scrollTo(0, 0);}}>
                     <h4 className="text-base font-semibold">
                         {companyItem.title}
                     </h4>

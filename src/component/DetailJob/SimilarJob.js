@@ -106,7 +106,7 @@ function SimilarJob({ jobDetail }) {
                                         <p
                                             className={`flex items-center justify-end text-sm font-semibold gap-1 mt-4`}
                                         >
-                                            <Link to={`/detail-job/${job.id}`}>
+                                            <Link to={`/detail-job/${job.id}`} onClick={() => {window.scrollTo(0, 0);}} >
                                                 <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal ml-2" style={{ backgroundColor: "#E995EB" }}>
                                                     <strong class="">
                                                         Xem chi tiết
