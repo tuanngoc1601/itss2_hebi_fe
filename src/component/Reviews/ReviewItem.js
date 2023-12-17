@@ -13,20 +13,28 @@ const ReviewItem = (props) => {
     // // Format the final string
     // const formattedDate = `${day}-${month}-${year}`;
 
-    const KeywordHighlighter = ({ text, keywords }) => {
+    const removeDiacritics = (str) => {
+        return str
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '');
+      };
+      
+      const KeywordHighlighter = ({ text, keywords }) => {
         const highlightKeywords = (text, keywords) => {
-          if (!keywords) {
+          if (keywords.length === 0) {
             return <span>{text}</span>;
           }
       
-          const regex = new RegExp(`(${keywords.join('|')})`, 'gi');
+          const cleanedText = removeDiacritics(text.toLowerCase()); // Chuyển văn bản thành chữ thường và loại bỏ dấu
+          const cleanedKeywords = keywords.map(keyword => removeDiacritics(keyword.toLowerCase())); // Chuyển từ khóa thành chữ thường và loại bỏ dấu
+          const regex = new RegExp(`(${cleanedKeywords.join('|')})`, 'gi');
       
-          return text.split(regex).map((word, index) => {
+          return cleanedText.split(regex).map((word, index) => {
             const isKeyword = regex.test(word);
             const key = `${word}_${index}`;
       
             return isKeyword ? (
-              <span key={key} style={{ backgroundColor: 'yellow' }}>{word}</span>
+              <span key={key} style={{ backgroundColor: 'yellow' }}>{text.substr(index, word.length)}</span>
             ) : (
               <span key={key}>{word}</span>
             );
@@ -39,7 +47,6 @@ const ReviewItem = (props) => {
           </div>
         );
       };
-
 
     return (
         <div className="flex flex-col justify-center items-start p-3 border shadow rounded-md cursor-pointer"
