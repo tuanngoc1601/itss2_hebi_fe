@@ -23,6 +23,7 @@ const PaginationPage = ({ setCurrentPage, currentPage, totalPages }) => {
 
     const handlePageClick = ({ selected }) => {
         setCurrentPage(selected+1);
+        window.scrollTo(0, 0);
     };
 
     const showNextButton = currentPage !== totalPages;
