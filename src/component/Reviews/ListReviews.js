@@ -78,7 +78,7 @@ const ListReviews = (props) => {
             {reviewData.map((review, index) => (
                 <ReviewItem
                 key={index} 
-                reviewTitle={review.review_title}
+                reviewTitle={review.title}
                 reviewerName={review.reviewer_name}
                 commentCount={review.comment_count}
                 likeCount={review.like_count}
@@ -86,7 +86,7 @@ const ListReviews = (props) => {
                 reviewText={review.review_text}
                 isAnonymous={review.is_anonymous}
                 createdAtDate={review.created_at}
-                ListKey={props.listKey}
+                listKey={props.listKey}
                 />
                 
             ))}

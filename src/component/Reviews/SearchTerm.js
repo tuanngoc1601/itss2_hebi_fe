@@ -88,7 +88,7 @@ const SearchTerm = (props) => {
                         ))}
                 </div>
                 <div className="w-30 bg-navActive text-sm text-white font-semibold rounded-md px-2 py-1 mt-2">
-                    Tổng số 30 kết quả
+                    Tổng số { props.searchedData.length } kết quả
                 </div>
             </div>
         </div>

@@ -15,7 +15,7 @@ const ReviewItem = (props) => {
 
     const KeywordHighlighter = ({ text, keywords }) => {
         const highlightKeywords = (text, keywords) => {
-          if (keywords.length === 0) {
+          if (!keywords) {
             return <span>{text}</span>;
           }
       
@@ -40,12 +40,13 @@ const ReviewItem = (props) => {
         );
       };
 
+
     return (
         <div className="flex flex-col justify-center items-start p-3 border shadow rounded-md cursor-pointer"
              style={{width:"760px"}}
         >
             <h4 className="text-md font-semibold text-navActive">
-                {props.reviewTitle}
+                <KeywordHighlighter text={props.reviewTitle} keywords={props.listKey} />
             </h4>
             <p className="text-xs mt-1">12-12-2012 | {props.isAnonymous == 1? "Người dùng ẩn danh" : props.reviewerName}</p>
             <div className="flex flex-row justify-start items-center gap-x-6 my-1">
