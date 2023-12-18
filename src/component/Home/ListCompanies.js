@@ -6,8 +6,6 @@ import { useState } from "react";
 const ListCompanies = ({jobList}) => {  
     const [currentPage, setCurrentPage] = useState(1);
     const jobPerPage = 4;
-
-
     const totalPages = Math.ceil(jobList.length/jobPerPage);  
     const indexOfLastJob = (currentPage) * jobPerPage;
     const indexOfFirstJob = indexOfLastJob - jobPerPage;

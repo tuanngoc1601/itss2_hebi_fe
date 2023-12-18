@@ -8,35 +8,33 @@ const ListReviews = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const reviewData = props.searchedData
 
-    const totalPages = 10;
+    const reviewPerPage = 10;
+    const totalPages = Math.ceil(reviewData.length / reviewPerPage);
+    const indexOfLastReview = (currentPage) * reviewPerPage;
+    const indexOfFirstReview = indexOfLastReview - reviewPerPage;
+    const currentReviews = reviewData.slice(indexOfFirstReview, indexOfLastReview);
 
     const onChangeArrangeOption = (e) => {
         setArrange(e.target.value);
         props.setSortKey(e.target.value);
         const fetchData = async () => {
             try {
-              
-      
-              // Tạo một đối tượng params với các thuộc tính là các phần tử của mảng
-              const params = {sort: e.target.value,};
-              props.listKey.forEach((value, index) => {
-                params[`search[${index}]`] = value;
-              });
-      
-              // Thực hiện HTTP GET request với mảng dữ liệu truyền vào làm các tham số
-              const response = await axios.get('http://127.0.0.1:8000/api/review-search', {
-                params,
-              });
-      
-              
-              props.setSearchedData(response.data);
+                // Tạo một đối tượng params với các thuộc tính là các phần tử của mảng
+                const params = { sort: e.target.value, };
+                props.listKey.forEach((value, index) => {
+                    params[`search[${index}]`] = value;
+                });
+
+                // Thực hiện HTTP GET request với mảng dữ liệu truyền vào làm các tham số
+                const response = await axios.get('http://127.0.0.1:8000/api/review-search', {
+                    params,
+                });
+                props.setSearchedData(response.data);
             } catch (error) {
-              console.error('Error fetching data:', error);
+                console.error('Error fetching data:', error);
             }
-          };
-      
-          fetchData();
-        
+        };
+        fetchData();
     }
 
     return (
@@ -75,22 +73,22 @@ const ListReviews = (props) => {
                 </div>
             </div>
             <div className="w-full flex flex-col justify-center items-start gap-3 mt-4">
-            {reviewData.map((review, index) => (
-                <ReviewItem
-                key={index} 
-                reviewTitle={review.title}
-                reviewerName={review.reviewer_name}
-                commentCount={review.comment_count}
-                likeCount={review.like_count}
-                dislikeCount={review.dislike_count}
-                reviewText={review.review_text}
-                isAnonymous={review.is_anonymous}
-                createdAtDate={review.created_at}
-                listKey={props.listKey}
-                />
-                
-            ))}
-               
+                {currentReviews.map((review, index) => (
+                    <ReviewItem
+                        key={index}
+                        reviewTitle={review.title}
+                        reviewerName={review.reviewer_name}
+                        commentCount={review.comment_count}
+                        likeCount={review.like_count}
+                        dislikeCount={review.dislike_count}
+                        reviewText={review.review_text}
+                        isAnonymous={review.is_anonymous}
+                        createdAtDate={review.created_at}
+                        listKey={props.listKey}
+                    />
+
+                ))}
+
             </div>
             <div className="w-full flex flex-row justify-center items-center">
                 <PaginationPage
