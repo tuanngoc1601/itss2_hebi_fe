@@ -7,33 +7,39 @@ import axios from "axios";
 const Reviews = () => {
   const [sortKey, setSortKey] = React.useState("like");
   const [listKey, setListKey] = React.useState([]);
-  const fetchData = async () => {
+  const fetchData = async (x) => {
     try {
-      const params = { sort: "like" };
-      const response = await axios.get('http://127.0.0.1:8000/api/review-search', {
-        params,
-      });
+      const params = { ...x, sort: sortKey ? sortKey : "like" };
+      const response = await axios.get(
+        "http://127.0.0.1:8000/api/review-search",
+        {
+          params,
+        },
+        { x }
+      );
       return response.data;
     } catch (error) {
-      console.error('Lỗi khi lấy dữ liệu:', error);
+      console.error("Lỗi khi lấy dữ liệu:", error);
     }
   };
+  console.log(listKey);
 
   const [searchedData, setSearchedData] = React.useState([]);
 
-
-
   React.useEffect(() => {
+    let x = {};
+    listKey.forEach((value, index) => {
+      x[`search[${index}]`] = value;
+    });
     const fetchDataAndSetState = async () => {
-      const data = await fetchData();
+      const data = await fetchData(x);
       if (data) {
         setSearchedData(data);
       }
     };
 
     fetchDataAndSetState(); // Gọi hàm fetchDataAndSetState khi component được mount
-
-  }, []);
+  }, [sortKey, listKey]);
 
   return (
     <div className="w-full flex flex-col">
