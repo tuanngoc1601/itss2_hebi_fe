@@ -14,15 +14,17 @@ function JobInfo({ jobDetail }) {
     const currentDate = new Date();
     const updatedAtDate = new Date(jobDetail.created_at);
     const timeDiffInDays = Math.floor((currentDate - updatedAtDate) / (1000 * 60 * 60 * 24));
+    const salaryAsInteger = Math.floor(jobDetail.salary);
+    const formattedSalary = salaryAsInteger.toLocaleString('vi-VN');
 
     return (
         <div >
-            <Card sx={{ width: "100%", marginTop: "5px"}}>
+            <Card sx={{ width: "100%", marginTop: "10px" }}>
                 <CardContent>
                     <Typography sx={{ fontSize: 20, fontWeight: "bold" }} color="black" gutterBottom>
                         {jobDetail.title}
                     </Typography>
-                    <Typography sx={{ fontSize: 14 }} component="div">
+                    <Typography sx={{ fontSize: 16, marginTop:"10px" }} component="div">
                         {jobDetail.business.name}
                     </Typography>
                     <Typography sx={{ mt: "10px", fontSize: 16 }} color="text.secondary">
@@ -34,7 +36,11 @@ function JobInfo({ jobDetail }) {
                                 } else if (jobDetail.salary == 0.0) {
                                     return "Không lương";
                                 } else {
-                                    return jobDetail.salary + "$";
+                                    return (
+                                        <span style={{ textDecoration: "underline", fontSize: "16.5px", fontWeight:"bold"}}>
+                                            {formattedSalary} đồng
+                                        </span>
+                                    );
                                 }
                             })()}
                         </p>
@@ -47,19 +53,19 @@ function JobInfo({ jobDetail }) {
                         Làm việc tại {jobDetail.business.location}
                         <OpenInNewOutlinedIcon sx={{ fontSize: 16, color: "#B511B8" }} />
                     </Typography>
-                    <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', marginTop: "5px" }}>
+                    <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', marginTop: "10px" }}>
                         <HomeOutlinedIcon sx={{ fontSize: 16, marginRight: 1, color: "#A6A6A6" }} />
                         Số lượng tuyển dụng: {jobDetail.recruitment_number} TTS
                     </Typography>
-                    <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', marginTop: "5px" }}>
+                    <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', marginTop: "10px" }}>
                         <BusinessCenterOutlinedIcon sx={{ fontSize: 16, marginRight: 1, color: "#A6A6A6" }} />
                         Lĩnh vực: {jobDetail.field}
                     </Typography>
-                    <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', marginTop: "5px" }}>
+                    <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', marginTop: "10px" }}>
                         <AccessTimeOutlinedIcon sx={{ fontSize: 16, marginRight: 1, color: "#A6A6A6" }} />
                         Thời gian thực tập: {jobDetail.internship_duration} tháng
                     </Typography>
-                    <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', marginTop: "5px" }}>
+                    <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', marginTop: "10px" }}>
                         <AccessTimeOutlinedIcon sx={{ fontSize: 16, marginRight: 1, color: "#A6A6A6" }} />
                         Đăng {timeDiffInDays} ngày trước
                     </Typography>
