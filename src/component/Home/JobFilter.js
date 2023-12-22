@@ -178,7 +178,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
                                 className="cursor-pointer"
                             />
                             <label htmlFor="quantity" className="cursor-pointer">
-                                Số lượng còn tuyển dụng
+                                Số lượng tuyển dụng
                             </label>
                         </div>
                     </div>

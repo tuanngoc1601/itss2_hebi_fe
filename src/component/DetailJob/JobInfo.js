@@ -70,7 +70,7 @@ function JobInfo({ jobDetail }) {
                         Đăng {timeDiffInDays} ngày trước
                     </Typography>
                     <Typography>
-                        <div className="flex flex-wrap items-center justify-start gap-1 mt-3 ml-2">
+                        <div className="flex flex-wrap items-center justify-start gap-1 mt-5 ml-2">
                             <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal text-gray-900">
                                 <strong class="">
                                     {(() => {

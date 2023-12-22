@@ -91,7 +91,7 @@ const CompanyItem = ({ companyItem }) => {
                             } else if (companyItem.salary === 0.0) {
                                 return "Không lương";
                             } else {
-                                return companyItem.salary;
+                                return Math.floor(companyItem.salary).toLocaleString('vi-VN') + " đồng"; 
                             }
                         })()}
                     </p>
