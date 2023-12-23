@@ -55,7 +55,7 @@ const Comment = ({ comments, visibleComments, setVisibleComments }) => {
           </div>
           <div className="flex flex-col my-4 gap-y-1 ps-12 pe-4">
             <h5 className="text-base font-semibold">{comment.title}</h5>
-            <p className="text-base font-light">{comment.comment_text}</p>
+            <div dangerouslySetInnerHTML={{ __html: comment.comment_text }} />
           </div>
         </div>
       ))}

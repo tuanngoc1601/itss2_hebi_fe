@@ -16,6 +16,7 @@ const DetailReview = () => {
     const [reviewDetail, setReviewDetail] = useState({});
     const [timeAgo, setTimeAgo] = useState('');
     const [visibleComments, setVisibleComments] = useState(1);
+    const [commentAdded, setCommentAdded] = useState(false);
 
     console.log(reviewId);
 
@@ -27,7 +28,9 @@ const DetailReview = () => {
             .catch(error => {
                 console.error('Error fetching job detail:', error);
             });
-    }, [reviewId]);
+    }, [reviewId, commentAdded]);
+
+
     console.log(reviewDetail)
 
     useEffect(() => {
@@ -73,7 +76,7 @@ const DetailReview = () => {
         <div className="w-full flex flex-col">
             <Header />
             <div className="w-7/12 flex flex-row items-start mx-auto mt-10">
-                <div className="w-1/6 flex flex-col justify-center items-center">
+                <div className="w-1/6 flex flex-col justify-center items-end">
                     <button className="w-35 h-35 flex flex-row justify-center items-center rounded-full border">
                         <IoCaretUpSharp />
                     </button>
@@ -83,59 +86,49 @@ const DetailReview = () => {
                     </button>
                 </div>
                 <div className="w-full flex flex-col justify-center items-center">
-                    <div className="w-5/6 border rounded-md">
-                        <div className="w-full h-14 flex flex-row justify-between items-center border-b bg-reviewBg px-4">
-                            <div className="flex flex-row items-center gap-x-2">
-                                <img src={IconUser} alt="" className="w-8" />
-                                <span className="font-semibold">
-                                    {reviewDetail.is_anonymous == 1 ? "Người dùng ẩn danh" : reviewDetail.user_name}
-                                </span>
-                            </div>
-                            <span className="font-light">{timeAgo}</span>
-                        </div>
-                        <div className="flex flex-col items-start justify-center px-4 bg-white">
-                            <div className="flex flex-col my-4 gap-y-1">
-                                <h5 className="text-base font-semibold">
-                                    {reviewDetail.title}
-                                </h5>
-                                <p className="text-base font-light">
-                                    {reviewDetail.review_text}
-                                </p>
-                            </div>
-                            {Object.keys(reviewDetail).length === 0 ? (
-                                <div style={{ width: "100%", height: "1000px", alignItems: "center", display: "flex", justifyContent: "center" }}>
-                                    <p>Loading...</p>
-                                </div>
-                            ) : (
-                                <div className="flex flex-col justify-center items-start gap-y-2">
-                                    {
-                                        reviewDetail.review_check_list_ratings.map((rating) => (
-                                            <ReviewStar rating={rating} />
-                                        ))
-                                    }
-                                </div>
-                            )}
-                        </div>
-                        {Object.keys(reviewDetail).length === 0 ? (
-                            <div style={{ width: "100%", height: "1000px", alignItems: "center", display: "flex", justifyContent: "center" }}>
-                                <p>Loading...</p>
-                            </div>
-                        ) : (
-                            <div className="mt-10">
-                                <Comment comments={reviewDetail.review_comments} visibleComments={visibleComments} setVisibleComments={setVisibleComments} />
-                            </div>
-                        )}
-                    </div>
                     {Object.keys(reviewDetail).length === 0 ? (
                         <div style={{ width: "100%", height: "1000px", alignItems: "center", display: "flex", justifyContent: "center" }}>
                             <p>Loading...</p>
                         </div>
                     ) : (
-                        visibleComments < reviewDetail.review_comments.length && (
-                            <span className="text-sky-400 hover:underline cursor-pointer my-4" onClick={loadMoreComments} style={{ color: "#127FFF", fontWeight: "bold" }}>
-                                Xem thêm
-                            </span>
-                        )
+                        <div className="w-full flex flex-col justify-center items-center">
+                            <div className="w-10/12 border rounded-md">
+                                <div className="w-full h-14 flex flex-row justify-between items-center border-b bg-reviewBg px-4">
+                                    <div className="flex flex-row items-center gap-x-2">
+                                        <img src={IconUser} alt="" className="w-8" />
+                                        <span className="font-semibold">
+                                            {reviewDetail.is_anonymous == 1 ? "Người dùng ẩn danh" : reviewDetail.user_name}
+                                        </span>
+                                    </div>
+                                    <span className="font-light">{timeAgo}</span>
+                                </div>
+                                <div className="flex flex-col items-start justify-center px-4 bg-white">
+                                    <div className="flex flex-col my-4 gap-y-1">
+                                        <h5 className="text-base font-semibold">
+                                            {reviewDetail.title}
+                                        </h5>
+                                        <p className="text-base font-light">
+                                            {reviewDetail.review_text}
+                                        </p>
+                                    </div>
+                                    <div className="flex flex-col justify-center items-start gap-y-2">
+                                        {
+                                            reviewDetail.review_check_list_ratings.map((rating) => (
+                                                <ReviewStar rating={rating} />
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                                <div className="mt-10">
+                                    <Comment comments={reviewDetail.review_comments} visibleComments={visibleComments} setVisibleComments={setVisibleComments} />
+                                </div>
+                            </div>
+                            {visibleComments < reviewDetail.review_comments.length && (
+                                <span className="text-sky-400 hover:underline cursor-pointer my-4" onClick={loadMoreComments} style={{ color: "#127FFF", fontWeight: "bold" }}>
+                                    Xem thêm
+                                </span>
+                            )}
+                        </div>
                     )}
                     <Editor
                         name="description"
@@ -144,6 +137,9 @@ const DetailReview = () => {
                         }}
                         editorLoaded={editorLoaded}
                         value={data}
+                        reviewId={reviewId}
+                        setCommentAdded={setCommentAdded}
+                        commentAdded={commentAdded}
                     />
                 </div>
             </div>

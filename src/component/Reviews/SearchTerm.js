@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
-import axios from "axios";
 
 const SearchTerm = (props) => {
   const [searchKey, setSearchKey] = useState("");
