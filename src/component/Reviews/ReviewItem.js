@@ -1,6 +1,7 @@
 import React from "react";
 import { AiOutlineComment } from "react-icons/ai";
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
+import { Link } from 'react-router-dom';
 
 
 const ReviewItem = (props) => {
@@ -56,9 +57,11 @@ const ReviewItem = (props) => {
     <div className="flex flex-col justify-center items-start p-3 border shadow rounded-md cursor-pointer"
       style={{ width: "760px" }}
     >
-      <h4 className="text-md font-semibold text-navActive">
-        <KeywordHighlighter text={props.reviewTitle} keywords={props.listKey} />
-      </h4>
+      <Link to={`/reviews/${props.reviewID}`} onClick={() => { window.scrollTo(0, 0); }}>
+        <h4 className="text-md font-semibold text-navActive">
+          <KeywordHighlighter text={props.reviewTitle} keywords={props.listKey} />
+        </h4>
+      </Link>
       <p className="text-xs mt-1">{formattedDate} | {props.isAnonymous == 1 ? "Người dùng ẩn danh" : props.reviewerName}</p>
       <div className="flex flex-row justify-start items-center gap-x-6 my-1">
         <p className="flex text-sm items-center cursor-pointer hover:underline hover:decoration-navActive hover:text-navActive px-3 py-1">
@@ -81,7 +84,6 @@ const ReviewItem = (props) => {
         </p>
       </div>
       <p className="text-sm">
-
         <KeywordHighlighter text={props.reviewText} keywords={props.listKey} />
       </p>
     </div>

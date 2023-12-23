@@ -16,7 +16,7 @@ function Editor({ onChange, editorLoaded, name, value }) {
     }, []);
 
     return (
-        <div className="w-full mb-12">
+        <div className="w-full mb-12 mt-5">
             {editorLoaded ? (
                 <div className="relative flex flex-col justify-center items-center">
                     <CKEditor
@@ -38,7 +38,7 @@ function Editor({ onChange, editorLoaded, name, value }) {
                             onChange(data);
                         }}
                     />
-                    <button className="text-white bg-navActive rounded-md px-4 py-1 relative -top-12" onClick={handleCommit}>Gửi</button>
+                    <button className="text-white bg-navActive rounded-md px-6 py-1 relative -top-12" style={{backgroundColor:"#FB24FF"}} onClick={handleCommit}>Gửi</button>
                 </div>
             ) : (
                 <div>Editor loading</div>

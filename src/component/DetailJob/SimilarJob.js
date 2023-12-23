@@ -18,7 +18,6 @@ function SimilarJob({ jobDetail }) {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            // Truyền tham số vào request bằng cách thêm params vào config của axios
             const response = await axios.get('http://localhost:8000/api/get-similar-job', {
               params: { id: jobDetail.id },
             });

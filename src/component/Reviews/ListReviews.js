@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReviewItem from "./ReviewItem";
 import PaginationPage from "../Common/PaginationPage";
 
@@ -14,6 +14,7 @@ const ListReviews = (props) => {
     indexOfFirstReview,
     indexOfLastReview
   );
+  console.log(props);
 
   return (
     <div className="w-full flex flex-col mb-10">
@@ -54,6 +55,7 @@ const ListReviews = (props) => {
         {currentReviews.map((review, index) => (
           <ReviewItem
             key={index}
+            reviewID={review.id}
             reviewTitle={review.title}
             reviewerName={review.reviewer_name}
             commentCount={review.comment_count}
