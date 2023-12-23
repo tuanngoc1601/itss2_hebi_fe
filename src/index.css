@@ -34,6 +34,10 @@ select:required:invalid {
   color: #a9a9a9;
 }
 
+.ck.ck-editor {
+  width: 100% !important;
+}
+
 .ck.ck-content {
   height: 250px;
   padding: 0 0.6em 3.5em 0.6em !important;
