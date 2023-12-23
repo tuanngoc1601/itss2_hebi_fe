@@ -59,9 +59,9 @@ const CompanyItem = ({ companyItem }) => {
                             })()}
                         </span>
                     </div>
-                    <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
+                    {/* <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
                         <span className="">Khoảng cách 3km</span>
-                    </div>
+                    </div> */}
                     <div className="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal uppercase text-gray-900">
                         <span className="">
                             {(() => {
@@ -91,7 +91,7 @@ const CompanyItem = ({ companyItem }) => {
                             } else if (companyItem.salary === 0.0) {
                                 return "Không lương";
                             } else {
-                                return companyItem.salary;
+                                return Math.floor(companyItem.salary).toLocaleString('vi-VN') + " đồng"; 
                             }
                         })()}
                     </p>

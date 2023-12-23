@@ -30,7 +30,7 @@ const Header = () => {
                                     Việc làm
                                 </NavLink>
                             </li>
-                            <li>
+                            {/* <li>
                                 <NavLink
                                     to="/cong-ty"
                                     className={({ isActive }) =>
@@ -57,7 +57,7 @@ const Header = () => {
                                 >
                                     Tìm kiếm thực tập
                                 </NavLink>
-                            </li>
+                            </li> */}
                             <li>
                                 <NavLink
                                     to="/reviews"
