@@ -15,31 +15,22 @@ import { Link } from 'react-router-dom';
 function SimilarJob({ jobDetail }) {
     const [jobList, setJobList] = useState([]);
 
-    const JobFilter = ({
-        province: "all",
-        salary_start: "all",
-        salary_end: "all",
-        industry: jobDetail.industry,
-        field: jobDetail.field,
-        internship_duration_start: "all",
-        internship_duration_end: "all",
-        internship_method: "all",
-        business_name: "all",
-        internship_type: "all",
-        filter: "1"
-    })
-
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await axios.post('http://localhost:8000/api/search-job', JobFilter);
-                setJobList(response.data);
-            } catch (error) {
-                console.error('Lỗi khi lấy dữ liệu:', error);
-            }
+          try {
+            // Truyền tham số vào request bằng cách thêm params vào config của axios
+            const response = await axios.get('http://localhost:8000/api/get-similar-job', {
+              params: { id: jobDetail.id },
+            });
+    
+            setJobList(response.data);
+          } catch (error) {
+            console.error('Lỗi khi lấy dữ liệu:', error);
+          }
         };
+    
         fetchData();
-    }, []);
+      }, [jobDetail.id]);
 
     console.log(jobList);
 
@@ -50,16 +41,17 @@ function SimilarJob({ jobDetail }) {
         return timeDiffInDays;
     }
 
+
     return (
-        <Box sx={{ width: "50%", marginLeft: "10%", marginTop: "20px", marginBottom: "20px" }}>
+        <Box sx={{ width: "50%", marginLeft: "10%", marginTop: "30px", marginBottom: "30px" }}>
             <p style={{ fontSize: 20, fontWeight: "bold", marginBottom: "20px    " }}>Việc làm tương tự dành cho bạn</p>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 {jobList
-                    .filter(job => job.id !== jobDetail.id)
+                    // .filter(job => job.id !== jobDetail.id)
                     .slice(0, 2)
                     .map((job, index) => (
                         <Grid item xs={6} key={index}>
-                            <Card sx={{ width: "100%", marginTop: "5px", backgroundColor: "#FFF4E9", height: "100%" }}>
+                            <Card sx={{ width: "100%", marginTop: "10px", backgroundColor: "#FFF4E9", height: "100%" }}>
                                 <CardContent>
                                     <Typography>
                                         <p style={{ fontSize: "18px", fontWeight: "bold", height: "20%" }}>{job.title}</p>
@@ -77,7 +69,7 @@ function SimilarJob({ jobDetail }) {
                                         </div>
                                     </Typography>
                                     <Typography sx={{ mt: "5px", fontSize: 16, padding: "5px 0", borderBottom: '1px dashed #DEDEDE' }} color="text.secondary">
-                                        <p className="flex items-center font-regular" style={{ color: "#414042", fontWeight: "semi-bold" }}>
+                                        <p className="flex items-center font-regular" style={{ color: "#414042", fontWeight: "bold",textDecoration: "underline", }}>
                                             <AiOutlineDollar className="text-lg mr-2" />
                                             {(() => {
                                                 if (job.salary == null) {
@@ -86,8 +78,8 @@ function SimilarJob({ jobDetail }) {
                                                     return "Không lương";
                                                 } else {
                                                     return (
-                                                        <span style={{ textDecoration: "underline", fontSize: "16.5px" }}>
-                                                            {job.salary}<span style={{ fontSize: "15px" }}>$</span>
+                                                        <span style={{  fontSize: "16px" }}>
+                                                            {Math.floor(job.salary).toLocaleString('vi-VN')} đồng
                                                         </span>
                                                     );
                                                 }
@@ -98,13 +90,13 @@ function SimilarJob({ jobDetail }) {
                                         <LocationOnOutlinedIcon sx={{ fontSize: 16, marginRight: 1, color: "#A6A6A6" }} />
                                         {job.location}
                                     </Typography>
-                                    <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', marginTop: "5px" }}>
+                                    <Typography sx={{ fontSize: 14, display: 'flex', alignItems: 'center', marginTop: "10px" }}>
                                         <AccessTimeOutlinedIcon sx={{ fontSize: 16, marginRight: 1, color: "#A6A6A6" }} />
                                         Đăng {diffinDays(job)} ngày trước
                                     </Typography>
                                     <Typography>
                                         <p
-                                            className={`flex items-center justify-end text-sm font-semibold gap-1 mt-4`}
+                                            className={`flex items-center justify-end text-sm font-semibold gap-1 mt-5`}
                                         >
                                             <Link to={`/detail-job/${job.id}`} onClick={() => {window.scrollTo(0, 0);}} >
                                                 <div class="relative grid select-none items-center whitespace-nowrap rounded-lg bg-gray-900/10 py-1 px-2 font-sans text-xs font-normal ml-2" style={{ backgroundColor: "#E995EB" }}>

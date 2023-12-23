@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 
 const DescriptionContainer = ({ jobDescription }) => {
   return (
-    <Card sx={{ width: "50%", marginLeft: "10%", marginTop: "10px" }}>
+    <Card sx={{ width: "50%", marginLeft: "10%", marginTop: "20px" }}>
       <CardContent>
         <Typography sx={{ fontSize: 20, fontWeight: "bold" }} color="black" gutterBottom variant="h5" component="div">
           Mô tả công việc 

@@ -56,6 +56,7 @@ const SearchTerm = (props) => {
                 index={index}
                 listKey={listKey}
                 setListKey={setListKey}
+                handleSearch={handleSearch}
               />
             ))}
         </div>
@@ -67,7 +68,7 @@ const SearchTerm = (props) => {
   );
 };
 
-const KeySearchChip = ({ data, index, listKey, setListKey }) => {
+const KeySearchChip = ({ data, index, listKey, setListKey, handleSearch }) => {
   const handleDeleteItem = () => {
     let newListKey = [...listKey].filter((item, i) => i !== index);
     setListKey(newListKey);

@@ -6,7 +6,7 @@ import FieldDropdownFilter from "./Dropdown/FieldDropdownFilter";
 import TimeDropdownFilter from "./Dropdown/TimeDropdownFilter";
 import MethodDropdownFilter from "./Dropdown/MethodDropdownFilter";
 import CompanyDropdownFilter from "./Dropdown/CompanyDropdownFilter";
-import DistanceDropdownFilter from "./Dropdown/DistanceDropdownFilter";
+//import DistanceDropdownFilter from "./Dropdown/DistanceDropdownFilter";
 import TypeDropdownFilter from "./Dropdown/TypeDropdownFilter";
 
 const JobFilter = ({ setJobFilter, jobList }) => {
@@ -58,8 +58,8 @@ const JobFilter = ({ setJobFilter, jobList }) => {
             <h3 className="font-bold text-3xl text-center text-navActive leading-8 mt-10">
                 Tìm kiếm công việc thực tập
             </h3>
-            <div className="w-11/12 mx-auto flex flex-row mt-8">
-                <div className="w-11/12 flex flex-col gap-y-4">
+            <div className="w-9/12 mx-auto flex flex-row mt-8">
+                <div className="w-9/12 flex flex-col gap-y-4">
                     <div className="flex flex-row justify-start items-center gap-x-4">
                         <LocationDropdownFilter
                             location={location}
@@ -73,28 +73,28 @@ const JobFilter = ({ setJobFilter, jobList }) => {
                             specialized={specialized}
                             setSpecialized={setSpecialized}
                         />
-                        
+
                         <TimeDropdownFilter
                             time={time}
                             setTime={setTime}
                         />
-                        
 
-                    <div 
-                        style = {{display: "flex", alignItems:"center", marginLeft:"145px"}}
-                    >
-                    <button className="bg-navActive text-white font-semibold text-base px-3 py-2 rounded"    
-                        onClick={() => {
-                            handleSentJobFilter();
-                        }}
-                    >
-                        Tìm kiếm
-                    </button>
-                </div>
+
+                        <div
+                            style={{ display: "flex", alignItems: "center", marginLeft: "20px"}}
+                        >
+                            <button className="bg-navActive text-white font-semibold text-base px-3 py-2 rounded" style={{width:"100px"}}
+                                onClick={() => {
+                                    handleSentJobFilter();
+                                }}
+                            >
+                                Tìm kiếm
+                            </button>
+                        </div>
                     </div>
                     <div className="flex flex-row justify-start items-center gap-x-4">
 
-                    <FieldDropdownFilter
+                        <FieldDropdownFilter
                             field={field}
                             setField={setField}
                         />
@@ -106,7 +106,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
                             company={company}
                             setCompany={setCompany}
                         />
-                        <DistanceDropdownFilter />
+                        {/* <DistanceDropdownFilter /> */}
                         <TypeDropdownFilter
                             type={type}
                             setType={setType}
@@ -114,15 +114,15 @@ const JobFilter = ({ setJobFilter, jobList }) => {
 
                     </div>
                 </div>
-                
+
             </div>
-            <div className="w-11/12 mx-auto flex flex-row justify-start items-center mt-6 pb-12 border-b">
+            <div className="w-9/12 mx-auto flex flex-row justify-start items-center mt-6 pb-12 border-b">
                 <div className="w-30 bg-navActive text-white font-semibold uppercase rounded-md px-4 py-2">
                     TỔNG CỘNG {jobList.length} KẾT QUẢ
                 </div>
             </div>
             <div className="w-full mt-6 mb-10">
-                <div className="w-11/12 mx-auto flex flex-row justify-center items-center gap-20 text-sm">
+                <div className="w-9/12 mx-auto flex flex-row justify-center items-center gap-20 text-sm">
                     <p>Ưu tiên hiển thị theo</p>
                     <div className="flex flex-row justify-center items-center gap-x-10">
                         <div className="flex flex-row justify-center items-center gap-x-2">
@@ -178,7 +178,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
                                 className="cursor-pointer"
                             />
                             <label htmlFor="quantity" className="cursor-pointer">
-                                Số lượng còn tuyển dụng
+                                Số lượng tuyển dụng
                             </label>
                         </div>
                     </div>
