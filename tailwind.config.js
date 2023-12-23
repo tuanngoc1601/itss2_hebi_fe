@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       width: {
+        35: "35px",
         150: "150px",
         190: "190px",
         225: "225px",
@@ -18,6 +19,7 @@ module.exports = {
         508: "508px",
       },
       height: {
+        35: "35px",
         80: "80px",
         150: "150px",
         225: "225px",
@@ -45,6 +47,9 @@ module.exports = {
         "2xl": "1536px",
       },
       colors: {
+        bgStarGroup: "#e9ecef",
+        starColor: "#ffdd58",
+        reviewBg: "#f7f7f7",
         navActive: "#B511B8",
         headingColor: "#2e2e2e",
         textColor: "#515151",

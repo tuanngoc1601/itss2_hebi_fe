@@ -5,6 +5,7 @@ import Signup from "./page/Signup";
 import Home from "./page/Home";
 import Reviews from "./page/Reviews";
 import DetailJob from "./page/DetailJob";
+import DetailReview from "./page/DetailReview";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
         <Route exact path="/sign-up" element={<Signup />} />
         <Route path="/" element={<Home />} />
         <Route exact path="/detail-job/:companyId" element={<DetailJob />} />
-          <Route path="/reviews" element={<Reviews />} />
+        <Route exact path="/reviews" element={<Reviews />} />
+        <Route path="/reviews/:reviewId" element={<DetailReview />} />
       </Routes>
     </div>
   );
