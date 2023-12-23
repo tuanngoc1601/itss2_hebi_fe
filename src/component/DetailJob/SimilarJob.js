@@ -15,31 +15,22 @@ import { Link } from 'react-router-dom';
 function SimilarJob({ jobDetail }) {
     const [jobList, setJobList] = useState([]);
 
-    const JobFilter = ({
-        province: "all",
-        salary_start: "all",
-        salary_end: "all",
-        industry: jobDetail.industry,
-        field: jobDetail.field,
-        internship_duration_start: "all",
-        internship_duration_end: "all",
-        internship_method: "all",
-        business_name: "all",
-        internship_type: "all",
-        filter: "1"
-    })
-
     useEffect(() => {
         const fetchData = async () => {
-            try {
-                const response = await axios.post('http://localhost:8000/api/search-job', JobFilter);
-                setJobList(response.data);
-            } catch (error) {
-                console.error('Lỗi khi lấy dữ liệu:', error);
-            }
+          try {
+            // Truyền tham số vào request bằng cách thêm params vào config của axios
+            const response = await axios.get('http://localhost:8000/api/get-similar-job', {
+              params: { id: jobDetail.id },
+            });
+    
+            setJobList(response.data);
+          } catch (error) {
+            console.error('Lỗi khi lấy dữ liệu:', error);
+          }
         };
+    
         fetchData();
-    }, []);
+      }, [jobDetail.id]);
 
     console.log(jobList);
 
@@ -49,15 +40,14 @@ function SimilarJob({ jobDetail }) {
         const timeDiffInDays = Math.floor((currentDate - updatedAtDate) / (1000 * 60 * 60 * 24));
         return timeDiffInDays;
     }
-    const salaryAsInteger = Math.floor(jobDetail.salary);
-    const formattedSalary = salaryAsInteger.toLocaleString('vi-VN');
+
 
     return (
         <Box sx={{ width: "50%", marginLeft: "10%", marginTop: "30px", marginBottom: "30px" }}>
             <p style={{ fontSize: 20, fontWeight: "bold", marginBottom: "20px    " }}>Việc làm tương tự dành cho bạn</p>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 {jobList
-                    .filter(job => job.id !== jobDetail.id)
+                    // .filter(job => job.id !== jobDetail.id)
                     .slice(0, 2)
                     .map((job, index) => (
                         <Grid item xs={6} key={index}>
