@@ -14,10 +14,13 @@ const ReviewItem = (props) => {
   const HighlightText = ({ text, keywords }) => {
     // Hàm để thay thế keyword bằng phần được highlight
     const highlightKeywords = (text, keywords) => {
-      const regex = new RegExp(`(${keywords.join('|')})`, 'gi');
+    
+    const lowercasedKeywords = keywords.map(keyword => keyword.toLowerCase());
+      const regex = new RegExp(`(${lowercasedKeywords.join('|')})`, 'gi');
       const parts = text.split(regex);
+      
       return parts.map((part, index) =>
-        keywords.includes(part) ? (
+      lowercasedKeywords.includes(part.toLowerCase()) ? (
           <span key={index} className="highlight" style={{backgroundColor:"yellow"}}>
             {part}
           </span>
