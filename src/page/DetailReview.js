@@ -17,12 +17,12 @@ const DetailReview = () => {
     const [timeAgo, setTimeAgo] = useState('');
     const [visibleComments, setVisibleComments] = useState(1);
     const [commentAdded, setCommentAdded] = useState(false);
-    const [reaction, setReaction] = useState();
+    const [reaction, setReaction] = useState({});
     const [getReaction, setGetReaction] = useState(
         {
             user_id: 1,
             review_id: reviewId,
-            reaction: reaction?.reaction_type 
+           
         }
     )
     
@@ -117,14 +117,14 @@ const DetailReview = () => {
             <div className="w-7/12 flex flex-row items-start mx-auto mt-10">
                 <div className="w-1/6 flex flex-col justify-center items-end">
                     <button className="w-35 h-35 flex flex-row justify-center items-center rounded-full border"
-                    style={{backgroundColor: reaction.reaction_type === 'like' ? 'green' : 'white'}}
+                    style={{backgroundColor: reaction.reaction_type === 'like' ? '#FFC5F9' : 'white'}}
                     onClick={handleLike}
                     >
                         <IoCaretUpSharp />
                     </button>
-                    <span className="my-2">{reaction.count}</span>
+                    <span className="my-2 w-35 h-35 flex flex-row justify-center items-center text-center font-bold text-lg">{reaction.count}</span>
                     <button className="w-35 h-35 flex flex-row justify-center items-center rounded-full border"
-                     style={{backgroundColor: reaction === 'dislike' ? 'green' : 'white'}}
+                     style={{backgroundColor: reaction.reaction_type === 'dislike' ? '#FFC5F9' : 'white'}}
 
                     onClick={handleDislike}
                     >

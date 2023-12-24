@@ -14,7 +14,7 @@ const ListReviews = (props) => {
     indexOfFirstReview,
     indexOfLastReview
   );
-  console.log(props);
+
 
   return (
     <div className="w-full flex flex-col mb-10">
