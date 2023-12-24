@@ -11,55 +11,33 @@ const ReviewItem = (props) => {
   const year = createdAtDate.getFullYear();
 
   const formattedDate = `${day}-${month}-${year}`;
-  const removeDiacritics = (str) => {
-    return str
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
-  };
-
-  const KeywordHighlighter = ({ text, keywords }) => {
-    if (keywords.length === 0) {
-      return <span>{text}</span>;
-    }
-
-    const cleanedText = removeDiacritics(text);
-    const cleanedKeywords = keywords.map(keyword => removeDiacritics(keyword));
-    const regex = new RegExp(`(${cleanedKeywords.join('|')})`, 'gi');
-
-    let lastIndex = 0;
-    const result = [];
-
-    cleanedText.split(regex).forEach((word, index) => {
-      const isKeyword = regex.test(word);
-
-      if (isKeyword) {
-        const keywordIndex = cleanedKeywords.findIndex(kw => removeDiacritics(kw) === word);
-        const keyword = keywords[keywordIndex];
-
-        result.push(
-          <span key={`${keyword}_${index}`} style={{ backgroundColor: 'yellow' }}>
-            {text.substr(lastIndex, word.length)}
+  const HighlightText = ({ text, keywords }) => {
+    // Hàm để thay thế keyword bằng phần được highlight
+    const highlightKeywords = (text, keywords) => {
+      const regex = new RegExp(`(${keywords.join('|')})`, 'gi');
+      const parts = text.split(regex);
+      return parts.map((part, index) =>
+        keywords.includes(part) ? (
+          <span key={index} className="highlight" style={{backgroundColor:"yellow"}}>
+            {part}
           </span>
-        );
-
-        lastIndex += word.length;
-      } else {
-        const originalWord = text.substr(lastIndex, word.length);
-        result.push(<span key={`${originalWord}_${index}`}>{originalWord}</span>);
-        lastIndex += word.length;
-      }
-    });
-
-    return <div>{result}</div>;
+        ) : (
+          <span key={index}>{part}</span>
+        )
+      );
+    };
+  
+    return <div className="highlight-text">{highlightKeywords(text, keywords)}</div>;
   };
 
+  
   return (
     <div className="flex flex-col justify-center items-start p-3 border shadow rounded-md cursor-pointer"
       style={{ width: "760px" }}
     >
       <Link to={`/reviews/${props.reviewID}`} onClick={() => { window.scrollTo(0, 0); }}>
         <h4 className="text-md font-semibold text-navActive">
-          <KeywordHighlighter text={props.reviewTitle} keywords={props.listKey} />
+          <HighlightText text={props.reviewTitle} keywords={props.listKey} />
         </h4>
       </Link>
       <p className="text-xs mt-1">{formattedDate} | {props.isAnonymous == 1 ? "Người dùng ẩn danh" : props.reviewerName}</p>
@@ -84,7 +62,7 @@ const ReviewItem = (props) => {
         </p>
       </div>
       <p className="text-sm">
-        <KeywordHighlighter text={props.reviewText} keywords={props.listKey} />
+        <HighlightText text={props.reviewText} keywords={props.listKey} />
       </p>
     </div>
   );

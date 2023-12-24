@@ -17,8 +17,15 @@ const DetailReview = () => {
     const [timeAgo, setTimeAgo] = useState('');
     const [visibleComments, setVisibleComments] = useState(1);
     const [commentAdded, setCommentAdded] = useState(false);
-
-    console.log(reviewId);
+    const [reaction, setReaction] = useState();
+    const [getReaction, setGetReaction] = useState(
+        {
+            user_id: 1,
+            review_id: reviewId,
+            reaction: reaction?.reaction_type 
+        }
+    )
+    
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/review-detail/${reviewId}`)
@@ -30,8 +37,17 @@ const DetailReview = () => {
             });
     }, [reviewId, commentAdded]);
 
-
-    console.log(reviewDetail)
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await axios.post('http://localhost:8000/api/review-reaction/',getReaction);
+            setReaction(response.data);
+          } catch (error) {
+            console.error('Lỗi khi lấy dữ liệu:', error);
+          }
+        };
+        fetchData();
+      }, [getReaction]);
 
     useEffect(() => {
         const calculateTimeAgo = () => {
@@ -72,16 +88,46 @@ const DetailReview = () => {
         setEditorLoaded(true);
     }, []);
 
+
+    const handleLike = () => {
+        if(reaction.reaction_type === 'like'){
+            
+        }else {
+            setGetReaction(prevState => ({
+                ...prevState,
+                reaction: 'like'
+            }));
+        }
+
+    }
+    const handleDislike = () => {
+        if(reaction.reaction_type === 'dislike'){
+            
+        }else {
+            setGetReaction(prevState => ({
+                ...prevState,
+                reaction: 'dislike'
+            }));
+        }
+    }
+
     return (
         <div className="w-full flex flex-col">
             <Header />
             <div className="w-7/12 flex flex-row items-start mx-auto mt-10">
                 <div className="w-1/6 flex flex-col justify-center items-end">
-                    <button className="w-35 h-35 flex flex-row justify-center items-center rounded-full border">
+                    <button className="w-35 h-35 flex flex-row justify-center items-center rounded-full border"
+                    style={{backgroundColor: reaction.reaction_type === 'like' ? 'green' : 'white'}}
+                    onClick={handleLike}
+                    >
                         <IoCaretUpSharp />
                     </button>
-                    <span className="my-2">109</span>
-                    <button className="w-35 h-35 flex flex-row justify-center items-center rounded-full border">
+                    <span className="my-2">{reaction.count}</span>
+                    <button className="w-35 h-35 flex flex-row justify-center items-center rounded-full border"
+                     style={{backgroundColor: reaction === 'dislike' ? 'green' : 'white'}}
+
+                    onClick={handleDislike}
+                    >
                         <IoCaretDownSharp />
                     </button>
                 </div>
