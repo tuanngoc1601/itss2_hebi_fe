@@ -15,7 +15,6 @@ const ListReviews = (props) => {
     indexOfLastReview
   );
 
-
   return (
     <div className="w-full flex flex-col mb-10">
       <div className="flex flex-row justify-start items-center gap-20 text-sm mt-3">
@@ -57,7 +56,7 @@ const ListReviews = (props) => {
             key={index}
             reviewID={review.id}
             reviewTitle={review.title}
-            reviewerName={review.reviewer_name}
+            reviewerName={<strong>{review.reviewer_name}</strong>}
             commentCount={review.comment_count}
             likeCount={review.like_count}
             dislikeCount={review.dislike_count}
