@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { IconUser } from "../../assets";
 
-const Comment = ({ comments, visibleComments, setVisibleComments }) => {
+const Comment = ({comments, visibleComments, setVisibleComments }) => {
   const [timeAgoList, setTimeAgoList] = useState([]);
 
   useEffect(() => {
-    setVisibleComments(1);
+    setVisibleComments(2);
   }, [comments]);
 
 
@@ -48,7 +48,7 @@ const Comment = ({ comments, visibleComments, setVisibleComments }) => {
         <div key={index}>
           <div className="w-full h-12 flex flex-row justify-between items-center border-y bg-reviewBg ps-12 pe-4">
             <div className="flex flex-row items-center gap-x-2">
-              <img src={IconUser} alt="" className="w-8" />
+              <img src={comment.avatar} alt="" className="w-8" />
               <span className="font-semibold">{comment.user_name}</span>
             </div>
             <span className="font-light">{timeAgoList[index]}</span>

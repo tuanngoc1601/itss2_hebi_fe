@@ -15,10 +15,10 @@ const DetailReview = () => {
     const [data, setData] = useState("");
     const [reviewDetail, setReviewDetail] = useState({});
     const [timeAgo, setTimeAgo] = useState('');
-    const [visibleComments, setVisibleComments] = useState(1);
+    const [visibleComments, setVisibleComments] = useState(3);
     const [commentAdded, setCommentAdded] = useState(false);
 
-    console.log(reviewId);
+    console.log(visibleComments);
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/review-detail/${reviewId}`)
@@ -95,7 +95,7 @@ const DetailReview = () => {
                             <div className="w-10/12 border rounded-md">
                                 <div className="w-full h-14 flex flex-row justify-between items-center border-b bg-reviewBg px-4">
                                     <div className="flex flex-row items-center gap-x-2">
-                                        <img src={IconUser} alt="" className="w-8" />
+                                        <img src={reviewDetail.is_anonymous == 1 ? IconUser : reviewDetail.avatar} alt="" className="w-8" />
                                         <span className="font-semibold">
                                             {reviewDetail.is_anonymous == 1 ? "Người dùng ẩn danh" : reviewDetail.user_name}
                                         </span>
