@@ -34,8 +34,6 @@ const Home = () => {
         fetchData();
       }, [jobFilter]);
 
-      console.log(jobList);
-
     return (
         <div>
             <Header />

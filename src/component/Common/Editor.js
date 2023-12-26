@@ -14,7 +14,6 @@ function Editor({ onChange, editorLoaded, name, value, reviewId, setCommentAdded
         });
         onChange('');
     };
-    console.log(data);
 
     useEffect(() => {
         editorRef.current = {

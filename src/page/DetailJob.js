@@ -21,9 +21,6 @@ const DetailJob = () => {
         console.error('Error fetching job detail:', error);
       });
   }, [companyId]);
-  useEffect(() => {
-    console.log(jobDetail);
-  }, [jobDetail]);
 
   return (
     <div>

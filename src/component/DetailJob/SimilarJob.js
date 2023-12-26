@@ -31,8 +31,6 @@ function SimilarJob({ jobDetail }) {
         fetchData();
       }, [jobDetail.id]);
 
-    console.log(jobList);
-
     function diffinDays(job) {
         const currentDate = new Date();
         const updatedAtDate = new Date(job.created_at);
