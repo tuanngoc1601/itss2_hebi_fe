@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { IconUser } from "../../assets";
 
 const Comment = ({comments, visibleComments, setVisibleComments }) => {
   const [timeAgoList, setTimeAgoList] = useState([]);
