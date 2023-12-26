@@ -28,7 +28,6 @@ function Editor({ onChange, editorLoaded, name, value, reviewId, setCommentAdded
                 console.log("API response:", response.data);
                 if(response.data){
                     setCommentAdded(!commentAdded);
-                    window.scrollTo(0, 0);
                 }
             } catch (error) {
                 console.error("API error:", error);

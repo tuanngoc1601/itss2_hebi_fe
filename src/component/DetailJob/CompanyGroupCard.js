@@ -28,7 +28,7 @@ const CompanyGroupCard = ({ company }) => {
             />
             <div>
               <h4 className="text-base font-bold" style={{ fontSize: "16px" }}>{company.name}</h4>
-              <a href="#" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit', fontSize: '14px', color: "#B511B8" }}>
+              <a href={company.website} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit', fontSize: '14px', color: "#B511B8" }}>
                 Xem công ty
                 <OpenInNewOutlinedIcon style={{ marginLeft: '5px', fontSize: '14px' }} />
               </a>

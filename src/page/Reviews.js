@@ -22,7 +22,6 @@ const Reviews = () => {
       console.error("Lỗi khi lấy dữ liệu:", error);
     }
   };
-  console.log(listKey);
 
   const [searchedData, setSearchedData] = React.useState([]);
 
