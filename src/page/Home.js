@@ -9,6 +9,7 @@ import { useState,useEffect } from "react";
 const Home = () => {   
     const [jobList,setJobList] = useState([]); 
     const [jobFilter, setJobFilter] = useState({
+        title: "",
         province: "all",
         salary_start: "all",
         salary_end: "all",
@@ -33,6 +34,8 @@ const Home = () => {
         };
         fetchData();
       }, [jobFilter]);
+
+      console.log(jobFilter);
 
     return (
         <div>

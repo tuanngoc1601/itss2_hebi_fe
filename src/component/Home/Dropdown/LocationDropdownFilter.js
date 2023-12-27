@@ -13,6 +13,7 @@ const LocationDropdownFilter = (props) => {
       province_type: "",
     },
   ]);
+
   const [searchTerm, setSearchTerm] = useState("");
   const dropdownRef = React.useRef(null);
 

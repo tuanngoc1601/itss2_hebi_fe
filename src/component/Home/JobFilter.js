@@ -8,8 +8,11 @@ import MethodDropdownFilter from "./Dropdown/MethodDropdownFilter";
 import CompanyDropdownFilter from "./Dropdown/CompanyDropdownFilter";
 //import DistanceDropdownFilter from "./Dropdown/DistanceDropdownFilter";
 import TypeDropdownFilter from "./Dropdown/TypeDropdownFilter";
+import { set } from "lodash";
+import TextSearch from "../Common/TextSearch";
 
 const JobFilter = ({ setJobFilter, jobList }) => {
+  const [title, setTitle] = useState("");
   const [arrange, setArrange] = React.useState("all");
   const [location, setLocation] = useState("all");
   const [salary, setSalary] = useState({
@@ -26,6 +29,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
 
   const handleSentJobFilter = () => {
     setJobFilter({
+      title: title,
       province: location,
       salary_start: salary.startSalary,
       salary_end: salary.endSalary,
@@ -42,6 +46,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
   const onChangeArrangeOption = (e) => {
     setArrange(e.target.value);
     setJobFilter({
+      title: title,
       province: location,
       salary_start: salary.startSalary,
       salary_end: salary.endSalary,
@@ -64,6 +69,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
       <div className="w-8/12 flex flex-row mt-8" style={{ marginLeft: "16%" }}>
         <div className="w-8/12 flex flex-col gap-y-4 ">
           <div className="flex flex-row justify-start items-center gap-x-4">
+            <TextSearch title={title} setTitle={setTitle}/>
             <LocationDropdownFilter
               location={location}
               setLocation={setLocation}
