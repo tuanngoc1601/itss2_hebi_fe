@@ -23,7 +23,7 @@ function Editor({ onChange, editorLoaded, name, value, reviewId, setCommentAdded
 
         const fetchData = async () => {
             try {
-                const response = await axios.post("http://localhost:8000/api/create-comment", data);
+                const response = await axios.post("https://internhubitss2.000webhostapp.com/api/create-comment", data);
                 console.log("API response:", response.data);
                 if(response.data){
                     setCommentAdded(!commentAdded);
