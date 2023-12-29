@@ -27,7 +27,7 @@ const DetailReview = () => {
     )
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/review-detail/${reviewId}`)
+        axios.get(`https://internhubitss2.000webhostapp.com/api/review-detail/${reviewId}`)
             .then(response => {
                 setReviewDetail(response.data);
             })
@@ -39,7 +39,7 @@ const DetailReview = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.post('http://localhost:8000/api/review-reaction/',getReaction);
+            const response = await axios.post('https://internhubitss2.000webhostapp.com/api/review-reaction/',getReaction);
             setReaction(response.data);
           } catch (error) {
             console.error('Lỗi khi lấy dữ liệu:', error);

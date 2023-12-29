@@ -29,7 +29,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
 
   const handleSentJobFilter = () => {
     setJobFilter({
-      title: title,
+      //title: title,
       province: location,
       salary_start: salary.startSalary,
       salary_end: salary.endSalary,
@@ -46,7 +46,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
   const onChangeArrangeOption = (e) => {
     setArrange(e.target.value);
     setJobFilter({
-      title: title,
+      //title: title,
       province: location,
       salary_start: salary.startSalary,
       salary_end: salary.endSalary,

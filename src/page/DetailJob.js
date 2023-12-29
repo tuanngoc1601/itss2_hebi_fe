@@ -13,7 +13,7 @@ const DetailJob = () => {
   const [jobDetail, setJobDetail] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/job-detail/${companyId}`)
+    axios.get(`https://internhubitss2.000webhostapp.com/api/job-detail/${companyId}`)
       .then(response => {
         setJobDetail(response.data);
       })

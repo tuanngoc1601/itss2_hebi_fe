@@ -18,7 +18,7 @@ function SimilarJob({ jobDetail }) {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get('http://localhost:8000/api/get-similar-job', {
+            const response = await axios.get('https://internhubitss2.000webhostapp.com/api/get-similar-job', {
               params: { id: jobDetail.id },
             });
     

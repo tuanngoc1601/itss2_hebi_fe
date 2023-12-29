@@ -11,7 +11,7 @@ const Reviews = () => {
     try {
       const params = { ...x, sort: sortKey ? sortKey : "like" };
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/review-search",
+        "https://internhubitss2.000webhostapp.com/api/review-search",
         {
           params,
         },

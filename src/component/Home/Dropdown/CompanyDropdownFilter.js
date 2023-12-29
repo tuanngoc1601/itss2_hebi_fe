@@ -34,7 +34,7 @@ const CompanyDropdownFilter = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/list-business");
+        const response = await fetch("https://internhubitss2.000webhostapp.com/api/list-business");
         const data = await response.json();
         setCompany([
           {

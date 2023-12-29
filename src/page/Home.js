@@ -9,7 +9,7 @@ import { useState,useEffect } from "react";
 const Home = () => {   
     const [jobList,setJobList] = useState([]); 
     const [jobFilter, setJobFilter] = useState({
-        title: "",
+        //title: "",
         province: "all",
         salary_start: "all",
         salary_end: "all",
@@ -26,16 +26,15 @@ const Home = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.post('http://localhost:8000/api/search-job',jobFilter);
+            const response = await fetch('https://internhubitss2.000webhostapp.com/api/search-job',{method:"POST", headers:{'Content-Type': 'application/json',}, body: JSON.stringify(jobFilter),});
             setJobList(response.data);
+            console.log("respone",response);
           } catch (error) {
             console.error('Lỗi khi lấy dữ liệu:', error);
           }
         };
         fetchData();
       }, [jobFilter]);
-
-      console.log(jobFilter);
 
     return (
         <div>
