@@ -23,16 +23,19 @@ const Home = () => {
         filter: "all"
     })
 
-    useEffect(() => {
+      useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await fetch('https://internhubitss2.000webhostapp.com/api/search-job',{method:"POST", headers:{'Content-Type': 'application/json',}, body: JSON.stringify(jobFilter),});
+            const response = await axios.get('https://internhubitss2.000webhostapp.com/api/search-job', {
+              params: jobFilter,
+            });
+    
             setJobList(response.data);
-            console.log("respone",response);
           } catch (error) {
             console.error('Lỗi khi lấy dữ liệu:', error);
           }
         };
+    
         fetchData();
       }, [jobFilter]);
 

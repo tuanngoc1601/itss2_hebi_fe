@@ -39,7 +39,9 @@ const DetailReview = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.post('https://internhubitss2.000webhostapp.com/api/review-reaction/',getReaction);
+            const response = await axios.get('https://internhubitss2.000webhostapp.com/api/review-reaction', {
+              params: getReaction,
+            });
             setReaction(response.data);
           } catch (error) {
             console.error('Lỗi khi lấy dữ liệu:', error);
