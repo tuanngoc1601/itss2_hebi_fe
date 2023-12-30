@@ -6,8 +6,15 @@ import Comment from "../component/Reviews/Comment";
 import Editor from "../component/Common/Editor";
 import { IoCaretDownSharp, IoCaretUpSharp } from "react-icons/io5";
 import { IconUser } from "../assets";
+import backrground from "../assets/images/BackgroundNew.svg";
+import like from "../assets/images/like.svg";
+import dislike from "../assets/images/dislike.svg";
+import likeColor from "../assets/images/likeColor.svg";
+import dislikeColor from "../assets/images/dislikeColor.svg";
+//import dislike from "../assets/images/iconamoon_dislike-light.svg";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import { set } from "lodash";
 
 const DetailReview = () => {
     const { reviewId } = useParams();
@@ -18,11 +25,12 @@ const DetailReview = () => {
     const [visibleComments, setVisibleComments] = useState(3);
     const [commentAdded, setCommentAdded] = useState(false);
     const [reaction, setReaction] = useState({});
+    const [isLike, setIsLike] = useState("");
     const [getReaction, setGetReaction] = useState(
         {
             user_id: 1,
             review_id: reviewId,
-           
+
         }
     )
 
@@ -43,12 +51,14 @@ const DetailReview = () => {
               params: getReaction,
             });
             setReaction(response.data);
+            setIsLike(response.data.reaction_type);
           } catch (error) {
             console.error('Lỗi khi lấy dữ liệu:', error);
           }
+
         };
         fetchData();
-      }, [getReaction]);
+    }, [getReaction]);
 
     useEffect(() => {
         const calculateTimeAgo = () => {
@@ -91,24 +101,27 @@ const DetailReview = () => {
 
 
     const handleLike = () => {
-        if(reaction.reaction_type === 'like'){
-            
-        }else {
+        if (reaction.reaction_type === 'like') {
+
+        } else {
             setGetReaction(prevState => ({
                 ...prevState,
                 reaction: 'like'
             }));
+            setIsLike('like');
         }
 
     }
     const handleDislike = () => {
-        if(reaction.reaction_type === 'dislike'){
-            
-        }else {
+        if (reaction.reaction_type === 'dislike') {
+
+        } else {
             setGetReaction(prevState => ({
                 ...prevState,
                 reaction: 'dislike'
             }));
+            setIsLike('dislike');
+
         }
     }
 
@@ -116,22 +129,6 @@ const DetailReview = () => {
         <div className="w-full flex flex-col">
             <Header />
             <div className="w-7/12 flex flex-row items-start mx-auto mt-10">
-                <div className="w-1/6 flex flex-col justify-center items-end">
-                    <button className="w-35 h-35 flex flex-row justify-center items-center rounded-full border"
-                    style={{backgroundColor: reaction.reaction_type === 'like' ? '#FFC5F9' : 'white'}}
-                    onClick={handleLike}
-                    >
-                        <IoCaretUpSharp />
-                    </button>
-                    <span className="my-2 w-35 h-35 flex flex-row justify-center items-center text-center font-bold text-lg">{reaction.count}</span>
-                    <button className="w-35 h-35 flex flex-row justify-center items-center rounded-full border"
-                     style={{backgroundColor: reaction.reaction_type === 'dislike' ? '#FFC5F9' : 'white'}}
-
-                    onClick={handleDislike}
-                    >
-                        <IoCaretDownSharp />
-                    </button>
-                </div>
                 <div className="w-full flex flex-col justify-center items-center">
                     {Object.keys(reviewDetail).length === 0 ? (
                         <div style={{ width: "100%", height: "1000px", alignItems: "center", display: "flex", justifyContent: "center" }}>
@@ -160,8 +157,35 @@ const DetailReview = () => {
                                     </div>
                                     <div className="flex flex-col justify-center items-start gap-y-2">
                                         {
-                                            reviewDetail.review_check_list_ratings.map((rating) => (
-                                                <ReviewStar rating={rating} />
+                                            reviewDetail.review_check_list_ratings.map((rating, index, array) => (
+                                                <div style={{
+                                                    display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row'
+                                                }}>
+                                                    <ReviewStar rating={rating} />
+
+                                                    {index === array.length - 1 && (
+                                                        <div style={{
+                                                            marginLeft:360,
+                                                            width: 128,
+                                                            height: 35,
+                                                            display: 'flex',
+                                                            justifyContent: 'center',
+                                                            alignItems: 'center',
+                                                            flexDirection: 'row',
+                                                            backgroundImage: `url("${backrground}")`,
+                                                            backgroundRepeat: 'no-repeat'
+                                                        }}>
+                                                            <img src={isLike==='like'?likeColor:like} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '20%', width: '20px', height: '20px' ,cursor:'pointer'}} onClick={handleLike}/>
+                                                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '25%', height: '80%', borderRight: '1px solid rgba(0, 0, 0, 0.3)', fontSize: '80%', fontWeight: 'bold' }}>
+                                                                {reaction.like_count}
+                                                            </div>
+                                                            <img src={isLike==='dislike'? dislikeColor:dislike} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '25%', width: '20px', height: '20px', marginLeft: 3 ,cursor:'pointer'}} onClick={handleDislike}/>
+                                                            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '20%', fontSize: '80%', fontWeight: 'bold' }}>
+                                                                {reaction.dislike_count}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
                                             ))
                                         }
                                     </div>
