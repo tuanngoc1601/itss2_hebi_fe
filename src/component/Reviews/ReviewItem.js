@@ -65,7 +65,7 @@ const ReviewItem = (props) => {
         </p>
       </div>
       <p className="text-sm">
-        <HighlightText text={props.reviewText} keywords={props.listKey} />
+        <HighlightText text={ props.reviewText} keywords={props.listKey} />
       </p>
     </div>
   );

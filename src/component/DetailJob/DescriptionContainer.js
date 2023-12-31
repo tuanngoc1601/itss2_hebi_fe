@@ -11,7 +11,7 @@ const DescriptionContainer = ({ jobDescription }) => {
           Mô tả công việc 
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {jobDescription}
+        <div dangerouslySetInnerHTML={{ __html: jobDescription }} />
         </Typography>
 
       </CardContent>

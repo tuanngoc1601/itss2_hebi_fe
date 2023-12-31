@@ -151,9 +151,10 @@ const DetailReview = () => {
                                         <h5 className="text-base font-semibold">
                                             {reviewDetail.title}
                                         </h5>
-                                        <p className="text-base font-light">
-                                            {reviewDetail.review_text}
-                                        </p>
+                                        <div  
+                                        dangerouslySetInnerHTML={{ __html: reviewDetail.review_text }} 
+                                        />
+                                        
                                     </div>
                                     <div className="flex flex-col justify-center items-start gap-y-2">
                                         {
