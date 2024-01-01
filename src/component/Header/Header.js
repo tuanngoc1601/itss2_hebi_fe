@@ -69,7 +69,7 @@ const Header = () => {
                                         ].join(" ")
                                     }
                                 >
-                                    Review
+                                    Nhận xét
                                 </NavLink>
                             </li>
                         </ul>

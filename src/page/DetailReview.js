@@ -146,7 +146,7 @@ const DetailReview = () => {
                                     </div>
                                     <span className="font-light">{timeAgo}</span>
                                 </div>
-                                <div className="flex flex-col items-start justify-center px-4 bg-white">
+                                <div style={{position: 'relative'}} className="flex flex-col items-start justify-center px-4 bg-white">
                                     <div className="flex flex-col my-4 gap-y-1">
                                         <h5 className="text-base font-semibold">
                                             {reviewDetail.title}
@@ -166,7 +166,10 @@ const DetailReview = () => {
 
                                                     {index === array.length - 1 && (
                                                         <div style={{
-                                                            marginLeft:360,
+                                                            position: 'absolute',
+                                                            bottom: '0',
+                                                            right: '16px',
+                                                            // marginLeft:"auto",
                                                             width: 128,
                                                             height: 35,
                                                             display: 'flex',

@@ -4,12 +4,14 @@ import PaginationPage from "../Common/PaginationPage";
 import { useState } from "react";
 
 const ListCompanies = ({jobList}) => {  
+    console.log("jobList", jobList)
     const [currentPage, setCurrentPage] = useState(1);
     const jobPerPage = 4;
     const totalPages = Math.ceil(jobList.length/jobPerPage);  
     const indexOfLastJob = (currentPage) * jobPerPage;
     const indexOfFirstJob = indexOfLastJob - jobPerPage;
     const currentJobs = jobList.slice(indexOfFirstJob, indexOfLastJob);
+    console.log("currentJobs", currentJobs)
     return (
         <div className="w-full mt-6 mb-10">
             <div className="w-11/12 mx-auto flex flex-col mt-10 gap-6">
