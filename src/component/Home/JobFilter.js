@@ -29,7 +29,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
 
   const handleSentJobFilter = () => {
     setJobFilter({
-      //title: title,
+      title: title,
       province: location,
       salary_start: salary.startSalary,
       salary_end: salary.endSalary,
@@ -46,7 +46,7 @@ const JobFilter = ({ setJobFilter, jobList }) => {
   const onChangeArrangeOption = (e) => {
     setArrange(e.target.value);
     setJobFilter({
-      //title: title,
+      title: title,
       province: location,
       salary_start: salary.startSalary,
       salary_end: salary.endSalary,
@@ -80,18 +80,18 @@ const JobFilter = ({ setJobFilter, jobList }) => {
               setSpecialized={setSpecialized}
             />
 
-            <TimeDropdownFilter time={time} setTime={setTime} />
+            {/* <TimeDropdownFilter time={time} setTime={setTime} /> */}
 
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                marginLeft: "20px",
+                // marginLeft: "20px",
               }}
             >
               <button
                 className="bg-navActive text-white font-semibold text-base px-3 py-2 rounded"
-                style={{ width: "100px" }}
+                style={{ width: "128px" }}
                 onClick={() => {
                   handleSentJobFilter();
                 }}
@@ -100,7 +100,8 @@ const JobFilter = ({ setJobFilter, jobList }) => {
               </button>
             </div>
           </div>
-          <div className="flex flex-row justify-start items-center gap-x-4">
+          <div className="flex flex-row justify-start items-center gap-x-5">
+            <TimeDropdownFilter time={time} setTime={setTime} />
             <FieldDropdownFilter field={field} setField={setField} />
             <MethodDropdownFilter method={method} setMethod={setMethod} />
             <CompanyDropdownFilter company={company} setCompany={setCompany} />
