@@ -75,12 +75,12 @@ const JobFilter = ({ setJobFilter, jobList }) => {
               setLocation={setLocation}
             />
             <SalaryDropdownFilter salary={salary} setSalary={setSalary} />
-            <SpecializedDropdownFilter
+            {/* <SpecializedDropdownFilter
               specialized={specialized}
               setSpecialized={setSpecialized}
-            />
+            /> */}
 
-            {/* <TimeDropdownFilter time={time} setTime={setTime} /> */}
+            <TimeDropdownFilter time={time} setTime={setTime} />
 
             <div
               style={{
@@ -101,8 +101,12 @@ const JobFilter = ({ setJobFilter, jobList }) => {
             </div>
           </div>
           <div className="flex flex-row justify-start items-center gap-x-5">
-            <TimeDropdownFilter time={time} setTime={setTime} />
+            
             <FieldDropdownFilter field={field} setField={setField} />
+            <SpecializedDropdownFilter
+              specialized={specialized}
+              setSpecialized={setSpecialized}
+            />
             <MethodDropdownFilter method={method} setMethod={setMethod} />
             <CompanyDropdownFilter company={company} setCompany={setCompany} />
             {/* <DistanceDropdownFilter /> */}
