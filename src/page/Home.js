@@ -5,6 +5,7 @@ import JobFilter from "../component/Home/JobFilter";
 import ListCompanies from "../component/Home/ListCompanies";
 import axios from "axios";
 import { useState,useEffect } from "react";
+import { baseApi } from "../constant";
 
 const Home = () => {   
     const [jobList,setJobList] = useState([]); 
@@ -26,7 +27,7 @@ const Home = () => {
       useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get('https://internhubitss2.000webhostapp.com/api/search-job', {
+            const response = await axios.get(`${baseApi}/api/search-job`, {
               params: jobFilter,
             });
     

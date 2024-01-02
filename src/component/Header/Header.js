@@ -79,10 +79,10 @@ const Header = () => {
                     <div className="cursor-pointer">
                         <img src={IconUser} alt="user" className="w-14" />
                     </div>
-                    <p className="text-base font-medium leading-5 tracking-wider">Hebi</p>
-                    <span className="cursor-pointer text-navActive">
+                    <p className="text-base font-medium leading-5 tracking-wider">Hoàng Xuân Bách</p>
+                    {/* <span className="cursor-pointer text-navActive">
                         <FaChevronDown className="text-xl" />
-                    </span>
+                    </span> */}
                 </div>
             </nav>
         </header>

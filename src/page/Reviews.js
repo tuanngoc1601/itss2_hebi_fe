@@ -4,6 +4,7 @@ import Footer from "../component/Footer/Footer";
 import SearchTerm from "../component/Reviews/SearchTerm";
 import ListReviews from "../component/Reviews/ListReviews";
 import axios from "axios";
+import { baseApi } from "../constant";
 const Reviews = () => {
   const [sortKey, setSortKey] = React.useState("like");
   const [listKey, setListKey] = React.useState([]);
@@ -11,7 +12,7 @@ const Reviews = () => {
     try {
       const params = { ...x, sort: sortKey ? sortKey : "like" };
       const response = await axios.get(
-        "https://internhubitss2.000webhostapp.com/api/review-search",
+        `${baseApi}/api/review-search`,
         {
           params,
         },

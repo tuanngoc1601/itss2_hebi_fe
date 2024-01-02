@@ -15,6 +15,7 @@ import dislikeColor from "../assets/images/dislikeColor.svg";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 import { set } from "lodash";
+import { baseApi } from "../constant";
 
 const DetailReview = () => {
     const { reviewId } = useParams();
@@ -35,7 +36,7 @@ const DetailReview = () => {
     )
 
     useEffect(() => {
-        axios.get(`https://internhubitss2.000webhostapp.com/api/review-detail/${reviewId}`)
+        axios.get(`${baseApi}/api/review-detail/${reviewId}`)
             .then(response => {
                 setReviewDetail(response.data);
             })
@@ -47,7 +48,7 @@ const DetailReview = () => {
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get('https://internhubitss2.000webhostapp.com/api/review-reaction', {
+            const response = await axios.get(`${baseApi}/api/review-reaction`, {
               params: getReaction,
             });
             setReaction(response.data);

@@ -7,13 +7,14 @@ import Header from "../component/Header/Header.js";
 import JobInfo from '../component/DetailJob/JobInfo.js';
 import SimilarJob from '../component/DetailJob/SimilarJob.js';
 import Footer from "../component/Footer/Footer";
+import { baseApi } from '../constant/index.js';
 
 const DetailJob = () => {
   const { companyId } = useParams();
   const [jobDetail, setJobDetail] = useState({});
 
   useEffect(() => {
-    axios.get(`https://internhubitss2.000webhostapp.com/api/job-detail/${companyId}`)
+    axios.get(`${baseApi}/api/job-detail/${companyId}`)
       .then(response => {
         setJobDetail(response.data);
       })
