@@ -80,9 +80,9 @@ const Header = () => {
                         <img src={IconUser} alt="user" className="w-14" />
                     </div>
                     <p className="text-base font-medium leading-5 tracking-wider">Hoàng Xuân Bách</p>
-                    // <span className="cursor-pointer text-navActive">
-                    //     <FaChevronDown className="text-xl" />
-                    // </span>
+                    {/* <span className="cursor-pointer text-navActive">
+                        <FaChevronDown className="text-xl" />
+                    </span> */}
                 </div>
             </nav>
         </header>
